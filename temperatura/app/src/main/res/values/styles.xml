@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <resources>
+        <!-- Estilo para texto normal -->
+        <style name="Texto">
+            <item name="android:textSize">11sp</item>
+            <item name="android:textColor">@color/colorPrimary</item>
+            <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato" si está disponible en tus recursos -->
+        </style>
+
+        <!-- Estilo para títulos -->
+        <style name="Titulos">
+            <item name="android:textSize">11sp</item>
+            <item name="android:textColor">@color/colorPrimary</item>
+            <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato-Bold" si está disponible en tus recursos -->
+            <item name="android:textStyle">bold</item>
+        </style>
+
+        <!-- Estilo para texto de banner superior -->
+        <style name="TextoBanner">
+            <item name="android:textSize">11sp</item>
+            <item name="android:textColor">@color/colorSecondary</item>
+            <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato" si está disponible en tus recursos -->
+        </style>
+
+        <!-- Estilo para título del banner superior -->
+        <style name="TituloBanner">
+            <item name="android:textSize">11sp</item>
+            <item name="android:textColor">@color/colorSecondary</item>
+            <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato-Bold" si está disponible en tus recursos -->
+            <item name="android:textStyle">bold</item>
+        </style>
+    </resources>
+
+</resources>
