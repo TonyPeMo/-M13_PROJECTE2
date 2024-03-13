@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.temperatura"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.temperatura"
         minSdk = 25
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
