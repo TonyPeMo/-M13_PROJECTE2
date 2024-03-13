@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Ocultar la barra de notificaciones -->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+
+
         <!-- Estilo para texto normal -->
         <style name="Texto">
             <item name="android:textSize">11sp</item>
@@ -9,7 +16,7 @@
 
         <!-- Estilo para títulos -->
         <style name="Titulos">
-            <item name="android:textSize">11sp</item>
+            <item name="android:textSize">18sp</item>
             <item name="android:textColor">@color/colorPrincipal</item>
             <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato-Bold" si está disponible en tus recursos -->
             <item name="android:textStyle">bold</item>

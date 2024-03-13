@@ -1,14 +1,11 @@
 package com.example.temperatura
 
-import android.content.res.Configuration
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 
-class MainActivity : AppCompatActivity() {
+class PantallaInicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        setContentView(R.layout.activity_main_land)
+        setContentView(R.layout.activity_pantalla_inicio)
     }
 }
