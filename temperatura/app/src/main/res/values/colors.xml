@@ -5,4 +5,10 @@
     <color name="colorSecundario">#666666</color>
     <color name="colorDetalles">#5B5B5B</color>
     <color name="colorFondo">#ffffff</color>
+    <color name="rojo">#ff0000</color>
+    <color name="azul">#0000ff</color>
+    <color name="verde">#00FF00</color>
+
+
+
 </resources>
