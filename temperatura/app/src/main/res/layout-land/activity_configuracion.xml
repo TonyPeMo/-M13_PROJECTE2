@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,18 +7,40 @@
     tools:context=".Configuracion"
     tools:ignore="MissingDefaultResource">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/titulo_configuracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/titulo_configuracion"
+        android:textColor="@color/colorTituloConfig"
+        android:textSize="34sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo_configuracion">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -47,12 +69,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/circle_blue_background_frio"
                     android:clickable="false"
+                    android:contentDescription="@string/pulsaParaCambiarElColor"
                     android:foregroundGravity="left"
                     android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -64,12 +86,11 @@
 
                 <TextView
                     android:id="@+id/TituloFrio_mapa_de_calor"
+                    style="@style/subtitulosConfiguracion"
                     android:layout_width="0dp"
                     android:layout_height="19dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:text="@string/frio"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -100,6 +121,8 @@
                     android:layout_marginBottom="4dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
+                    android:textColorHint="@color/colorTextoCuadriculaConfig"
+                    app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textoFrio_mapa_de_calor"
@@ -109,7 +132,9 @@
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
+                        android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
+                        android:gravity="center"
                         android:hint="@string/T_Max" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,12 +149,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/circle_blue_background_optimo"
                     android:clickable="false"
+                    android:contentDescription="@string/pulsaParaCambiarElColor"
                     android:foregroundGravity="left"
                     android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -140,8 +165,9 @@
 
                 <TextView
                     android:id="@+id/TituloOptimo_mapa_de_calor"
+                    style="@style/subtitulosConfiguracion"
                     android:layout_width="wrap_content"
-                    android:layout_height="19dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="2dp"
@@ -162,6 +188,8 @@
                     android:layout_marginBottom="4dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
+                    android:textColorHint="@color/colorTextoCuadriculaConfig"
+                    app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/TminNotificacionesOptimo_mapa_de_calor"
                     app:layout_constraintStart_toEndOf="@+id/TituloOptimo_mapa_de_calor"
@@ -171,7 +199,9 @@
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
+                        android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
+                        android:gravity="center"
                         android:hint="@string/T_Max" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -183,6 +213,8 @@
                     android:layout_marginBottom="4dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
+                    android:textColorHint="@color/colorTextoCuadriculaConfig"
+                    app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/TmaxNotificacionesOptimo_mapa_de_calor"
@@ -192,7 +224,9 @@
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
+                        android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
+                        android:gravity="center"
                         android:hint="@string/T_Min" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,12 +241,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="2dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/circle_blue_background_calor"
                     android:clickable="false"
+                    android:contentDescription="@string/pulsaParaCambiarElColor"
                     android:foregroundGravity="left"
                     android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -223,6 +257,7 @@
 
                 <TextView
                     android:id="@+id/TituloCalor_mapa_de_calor"
+                    style="@style/subtitulosConfiguracion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -259,6 +294,8 @@
                     android:layout_marginBottom="4dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
+                    android:textColorHint="@color/colorTextoCuadriculaConfig"
+                    app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textoCalor_mapa_de_calor"
@@ -268,7 +305,9 @@
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
+                        android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
+                        android:gravity="center"
                         android:hint="@string/T_Min" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -276,15 +315,17 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -314,9 +355,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="2dp"
                     android:layout_marginBottom="8dp"
-                    android:foregroundGravity="left"
+                    android:contentDescription="@string/advertenciaFrio"
+                    android:foregroundGravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/TituloFrio"
                     app:layout_constraintStart_toStartOf="parent"
@@ -325,6 +366,7 @@
 
                 <TextView
                     android:id="@+id/TituloFrio"
+                    style="@style/subtitulosConfiguracion"
                     android:layout_width="0dp"
                     android:layout_height="19dp"
                     android:layout_marginStart="8dp"
@@ -358,10 +400,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="4dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
+                    android:textColorHint="@color/colorTextoCuadriculaConfig"
+                    app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textoFrio"
@@ -371,7 +414,9 @@
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
+                        android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
+                        android:gravity="center"
                         android:hint="@string/T_Max" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -387,8 +432,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="2dp"
                     android:layout_marginBottom="8dp"
+                    android:contentDescription="@string/advertenciaCalor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/TituloCalor"
                     app:layout_constraintStart_toStartOf="parent"
@@ -397,6 +442,7 @@
 
                 <TextView
                     android:id="@+id/TituloCalor"
+                    style="@style/subtitulosConfiguracion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -430,10 +476,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="4dp"
                     android:foregroundGravity="center_horizontal"
                     android:gravity="center_horizontal"
+                    android:textColorHint="@color/colorTextoCuadriculaConfig"
+                    app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textoCalor"
@@ -443,7 +490,9 @@
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
+                        android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
+                        android:gravity="center"
                         android:hint="@string/T_Min" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -451,20 +500,44 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/button"
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:layout_width="118dp"
-            android:layout_height="43dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/colorBotonLogin"
-            android:elevation="10dp"
-            android:text="@string/guardar"
-            android:textColor="@color/colorPrincipal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/buttonGuardar"
+        style="@style/Widget.Material3.Button.TextButton.Dialog.Icon"
+        android:layout_width="118dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="@color/colorBotonConfig"
+        android:elevation="5dp"
+        android:gravity="center"
+        android:text="@string/guardar"
+        android:textColor="@color/colorLetraConfig"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:strokeColor="@color/colorBotonConfigBorde"
+        app:strokeWidth="1dp" />
 
-</FrameLayout>
+    <FrameLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/atras"
+        android:onClick="toAtras"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imagen_atras"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/atras"
+            app:srcCompat="@drawable/arrow_back_ios_new_24px" />
+
+    </FrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

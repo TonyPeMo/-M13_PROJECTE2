@@ -12,8 +12,14 @@
     <string name="T_Max">T.Max</string>
     <string name="titulo_mapa_de_calor">Mapa de calor</string>
     <string name="titulo_notificaciones">Notificaciones</string>
-    <string name="titulo_configuracion">CONFIGURACION</string>
+    <string name="titulo_configuracion">CONFIGURACIÓN</string>
     <string name="guardar">GUARDAR</string>
+    <string name="atras">Atras</string>
+
+    <string name="advertenciaFrio">Imagen advertencia frio</string>
+    <string name="advertenciaCalor">Imagen advertencia calor</string>
+    <string name="pulsaParaCambiarElColor">Pulsa para cambiar el color</string>
+
 
 
 </resources>

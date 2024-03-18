@@ -6,8 +6,18 @@
     <color name="colorDetalles">#5B5B5B</color>
     <color name="colorFondo">#ffffff</color>
     <color name="rojo">#ff0000</color>
-    <color name="azul">#0000ff</color>
-    <color name="verde">#00FF00</color>
+    <color name="azul">#1C3AFF</color>
+    <color name="verde">#3BA53B</color>
+    <color name="colorLetraLogin">#382FE3</color>
+    <color name="colorBotonLogin">#30EEBB</color>
+    <color name="colorLetraConfig">#5B5B5B</color>
+    <color name="colorBotonConfig">#F7F2FA</color>
+    <color name="colorBotonConfigBorde">#79747E</color>
+    <color name="colorTituloConfig">#5B5B5B</color>
+
+    <color name="colorFondoCuadriculaConfig">#DDDCDC</color>
+    <color name="colorTextoCuadriculaConfig">#49454F</color>
+    <color name="ColorCuadriculaMargen">#79747E</color>
 
 
 
