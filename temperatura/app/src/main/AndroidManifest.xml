@@ -14,13 +14,17 @@
         android:theme="@style/Theme.Temperatura"
         tools:targetApi="31">
         <activity
-            android:name=".PantallaInicio"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
+<<<<<<< HEAD
             android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Login"
+=======
+            android:name=".PantallaInicio"
+>>>>>>> layoutPrincipal
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>

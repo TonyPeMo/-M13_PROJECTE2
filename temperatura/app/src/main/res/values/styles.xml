@@ -25,7 +25,7 @@
         <!-- Estilo para texto de banner superior -->
         <style name="TextoBanner">
             <item name="android:textSize">11sp</item>
-            <item name="android:textColor">@color/colorPrincipal</item>
+            <item name="android:textColor">@color/colorDetalles</item>
             <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato" si está disponible en tus recursos -->
         </style>
 

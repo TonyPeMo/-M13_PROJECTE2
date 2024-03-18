@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Temperatura</string>
+<<<<<<< HEAD
     <string name="nombre_usuario">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="reset_password"><u>He olvidado mi contraseña</u></string>
     <string name="login">LOGIN</string>
+=======
+
+>>>>>>> layoutPrincipal
 </resources>
