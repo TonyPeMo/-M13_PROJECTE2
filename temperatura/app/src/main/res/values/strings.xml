@@ -5,8 +5,18 @@
     <string name="reset_password"><u>He olvidado mi contraseña</u></string>
     <string name="login">LOGIN</string>
     <string-array name="menu_options">
-        <item>Opción 1</item>
-        <item>Opción 2</item>
-        <item>Opción 3</item>
+        <item>A03 </item>
+        <item>A01</item>
+        <item>A02</item>
+        <item>ATECA</item>
+        <item>A04</item>
     </string-array>
+    <string name="info_aula_titulo"><b><big>Informació de l'aula</big></b></string>
+    <string name="info_aula_temperatura_actual">&#8226; Temperatura actual: 23º</string>
+    <string name="info_aula_temperatura_minima">&#8226; Temperatura mínima: 17º</string>
+    <string name="info_aula_temperatura_maxima">&#8226; Temperatura máxima: 27º</string>
+
+
+
+
 </resources>
