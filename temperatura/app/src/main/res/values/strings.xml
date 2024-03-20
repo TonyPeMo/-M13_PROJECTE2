@@ -1,8 +1,27 @@
 <resources>
     <string name="app_name">Temperatura</string>
+
     <string name="nombre_usuario">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="reset_password"><u>He olvidado mi contraseña</u></string>
     <string name="login">LOGIN</string>
+
+    <string name="frio">Frio</string>
+    <string name="calor">Calor</string>
+    <string name="optima">Optima</string>
+    <string name="por_encima_de">por encima de</string>
+    <string name="por_debajo_de">por debajo de</string>
+    <string name="T_Min">T.Min</string>
+    <string name="T_Max">T.Max</string>
+    <string name="titulo_mapa_de_calor">Mapa de calor</string>
+    <string name="titulo_notificaciones">Notificaciones</string>
+    <string name="titulo_configuracion">CONFIGURACIÓN</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="atras">Atras</string>
+
+    <string name="advertenciaFrio">Imagen advertencia frio</string>
+    <string name="advertenciaCalor">Imagen advertencia calor</string>
+    <string name="pulsaParaCambiarElColor">Pulsa para cambiar el color</string>
+
 
 </resources>
