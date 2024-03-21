@@ -26,6 +26,9 @@
         <activity
             android:name=".Login"
             android:exported="false" />
+        <activity
+            android:name=".Graficas"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

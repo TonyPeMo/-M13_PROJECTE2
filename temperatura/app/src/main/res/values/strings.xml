@@ -23,5 +23,11 @@
     <string name="advertenciaCalor">Imagen advertencia calor</string>
     <string name="pulsaParaCambiarElColor">Pulsa para cambiar el color</string>
 
+    <string name="hora_inicio">Hora inicial</string>
+    <string name="hora_final">Hora final</string>
+    <string name="fecha_inicio">Fecha de inicio</string>
+    <string name="fecha_final">Fecha final</string>
+
+
 
 </resources>
