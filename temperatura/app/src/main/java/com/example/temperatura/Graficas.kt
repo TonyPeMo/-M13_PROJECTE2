@@ -38,16 +38,23 @@ class Graficas : AppCompatActivity() {
         selectedTimeTextView_final = findViewById(R.id.textViewTimePicker_final)
 
         // Establecer la fecha y hora por defecto para el inicio y el final
-        val currentDate = Calendar.getInstance().time
-        selectedDateTextView_inicio.text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(currentDate)
-        selectedTimeTextView_inicio.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentDate)
-        selectedDateTextView_final.text = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(currentDate)
-        selectedTimeTextView_final.text = SimpleDateFormat("HH:mm", Locale.getDefault()).format(currentDate)
+        val currentDate = Calendar.getInstance()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
-        selectedDateInicio = currentDate
-        selectedTimeInicio = currentDate
-        selectedDateFinal = currentDate
-        selectedTimeFinal = currentDate
+        // Solo establecer la fecha y la hora por defecto en la fecha de inicio
+        selectedDateTextView_inicio.text = "Select date"
+        selectedTimeTextView_inicio.text = "08:00"
+
+        // Establecer la fecha y la hora por defecto en la fecha final
+        selectedDateTextView_final.text = dateFormat.format(currentDate.time)
+        selectedTimeTextView_final.text = timeFormat.format(currentDate.time)
+
+        selectedDateInicio = Date()
+        selectedTimeInicio = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 8); set(Calendar.MINUTE, 0) }.time
+
+        selectedDateFinal = currentDate.time
+        selectedTimeFinal = currentDate.time
     }
 
     fun showDatePicker(view: View) {
