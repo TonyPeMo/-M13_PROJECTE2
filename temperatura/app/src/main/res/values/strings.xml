@@ -15,8 +15,22 @@
     <string name="info_aula_temperatura_actual">&#8226; Temperatura actual: 23º</string>
     <string name="info_aula_temperatura_minima">&#8226; Temperatura mínima: 17º</string>
     <string name="info_aula_temperatura_maxima">&#8226; Temperatura máxima: 27º</string>
+    <string name="frio">Frio</string>
+    <string name="calor">Calor</string>
+    <string name="optima">Optima</string>
+    <string name="por_encima_de">por encima de</string>
+    <string name="por_debajo_de">por debajo de</string>
+    <string name="T_Min">T.Min</string>
+    <string name="T_Max">T.Max</string>
+    <string name="titulo_mapa_de_calor">Mapa de calor</string>
+    <string name="titulo_notificaciones">Notificaciones</string>
+    <string name="titulo_configuracion">CONFIGURACIÓN</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="atras">Atras</string>
 
-
+    <string name="advertenciaFrio">Imagen advertencia frio</string>
+    <string name="advertenciaCalor">Imagen advertencia calor</string>
+    <string name="pulsaParaCambiarElColor">Pulsa para cambiar el color</string>
 
 
 </resources>
