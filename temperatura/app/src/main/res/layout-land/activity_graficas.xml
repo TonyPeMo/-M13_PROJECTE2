@@ -7,134 +7,146 @@
     tools:ignore="MissingDefaultResource">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView"
+            style="@style/Titulos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:text="@string/titulo_configuracion" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
-                style="@style/Titulos"
+                android:id="@+id/texto_dia_inicio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/titulo_configuracion" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/fecha_inicio" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Space
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/texto_dia_inicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/fecha_inicio" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/text_hora_inicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/hora_inicio" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewDatePicker_inicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:onClick="showDatePicker"
-                    android:text="Select Date" />
-
-                <TextView
-                    android:id="@+id/textViewTimePicker_inicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:onClick="showTimePicker"
-                    android:text="Select Time" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/text_hora_inicio"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/texto_dia_final"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/fecha_final" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/text_hora_final"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/hora_final" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="220dp"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textViewDatePicker_final"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:onClick="showDatePicker"
-                    android:text="Select Date" />
-
-                <TextView
-                    android:id="@+id/textViewTimePicker_final"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:onClick="showTimePicker"
-                    android:text="Select Time" />
-            </LinearLayout>
-
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/hora_inicio" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewDatePicker_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="showDatePicker"
+                android:text="Select Date" />
+
+            <TextView
+                android:id="@+id/textViewTimePicker_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="showTimePicker"
+                android:text="Select Time" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/texto_dia_final"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/fecha_final" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/text_hora_final"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/hora_final" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewDatePicker_final"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="showDatePicker"
+                android:text="Select Date" />
+
+            <TextView
+                android:id="@+id/textViewTimePicker_final"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="showTimePicker"
+                android:text="Select Time" />
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableLayout>
+
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        tools:srcCompat="@drawable/image2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
