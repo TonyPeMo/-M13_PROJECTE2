@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,79 +9,81 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:visibility="visible"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        android:padding="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/icon_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Spinner
-            android:id="@+id/spinner_menu"
-            android:layout_width="115dp"
-            android:layout_height="48dp"
-            android:entries="@array/menu_options"
-            android:popupBackground="@android:color/white"
-            app:layout_constraintEnd_toStartOf="@+id/notificationIcon"
-            app:layout_constraintHorizontal_bias="0.537"
-            app:layout_constraintStart_toEndOf="@+id/backButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/icon_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/notificationIcon"
-            android:layout_width="29dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/icon_notificaciones"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Spinner
+                android:id="@+id/spinner_menu"
+                android:layout_width="115dp"
+                android:layout_height="48dp"
+                android:entries="@array/menu_options"
+                android:popupBackground="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/notificationIcon"
+                app:layout_constraintHorizontal_bias="0.537"
+                app:layout_constraintStart_toEndOf="@+id/backButton"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/notificationIcon"
+                android:layout_width="29dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_notificaciones"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <!-- Tabla de dos columnas -->
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/border_black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <!-- Fila 1 -->
+        <!-- Primera fila -->
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="350dp"
+            android:layout_height="match_parent">
 
-            <!-- Columna 1 -->
+            <!-- Primera columna -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="267dp"
+                android:layout_height="275dp"
+                android:gravity="center"
                 android:orientation="vertical">
 
-                <!-- Texto: Informació de l'aula -->
+                <!-- Texto: Información de l'aula -->
+
+                <!-- Texto: Temperatura actual -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -91,22 +92,23 @@
                     android:textAlignment="center"
                     android:textColor="#000000" />
 
-                <!-- Texto: Temperatura actual -->
+                <!-- Texto: Temperatura mínima -->
                 <TextView
+                    android:id="@+id/textViewTemperaturaActual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/info_aula_temperatura_actual" />
 
-                <!-- Texto: Temperatura mínima -->
                 <TextView
+                    android:id="@+id/textViewTemperaturaMinima"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/info_aula_temperatura_minima" />
 
-                <!-- Texto: Temperatura máxima -->
                 <TextView
+                    android:id="@+id/textViewTemperaturaMaxima"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
@@ -114,24 +116,26 @@
 
             </LinearLayout>
 
-            <!-- Columna 2 (de ser necesario) -->
+            <!-- Segunda columna -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/border_black"
                 android:orientation="vertical">
 
-                <!-- Puedes añadir elementos para la columna 2 aquí -->
 
+                <ImageView
+                    android:id="@+id/aula03"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/aula3" />
             </LinearLayout>
+
         </TableRow>
 
-        <!-- Puedes añadir más filas según sea necesario -->
 
     </TableLayout>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

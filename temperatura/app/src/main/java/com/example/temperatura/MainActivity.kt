@@ -31,5 +31,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, PantallaInicio::class.java)
             startActivity(intent)
         }
+
+        val btnConfiguracion4: Button = findViewById(R.id.temperaturaAula)
+
+        btnConfiguracion4.setOnClickListener {
+            val intent = Intent(this, TemperaturaAula::class.java)
+            startActivity(intent)
+        }
     }
 }
