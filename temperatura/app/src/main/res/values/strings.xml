@@ -24,4 +24,13 @@
     <string name="pulsaParaCambiarElColor">Pulsa para cambiar el color</string>
 
 
+    <string-array name="menu_options">
+        <item>A03 </item>
+        <item>A01</item>
+        <item>A02</item>
+        <item>ATECA</item>
+        <item>A04</item>
+    </string-array>
+
+
 </resources>

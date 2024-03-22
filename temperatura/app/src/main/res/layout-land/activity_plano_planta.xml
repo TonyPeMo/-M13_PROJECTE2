@@ -11,39 +11,51 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:orientation="horizontal"
         android:padding="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/icon_config"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imagen_atras"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/atras"
-            app:srcCompat="@drawable/arrow_back_ios_new_24px" />
+            <Spinner
+                android:id="@+id/spinner_menu"
+                android:layout_width="115dp"
+                android:layout_height="48dp"
+                android:entries="@array/menu_options"
+                android:popupBackground="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/notificationIcon"
+                app:layout_constraintHorizontal_bias="0.537"
+                app:layout_constraintStart_toEndOf="@+id/backButton"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/notificationIcon"
+                android:layout_width="29dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/icon_notificaciones"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/TextoBanner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:text="" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/icon_notificaciones" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 
@@ -64,7 +76,6 @@
             android:layout_height="match_parent"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
-
             android:src="@drawable/mapa_temp" />
 
     </LinearLayout>
