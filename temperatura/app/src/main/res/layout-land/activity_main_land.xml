@@ -12,7 +12,29 @@
         android:id="@+id/btnConfiguracion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ir a Configuración" />
+        android:text="Ir a Configuración"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnConfiguracion" />
+
+    <Button
+        android:id="@+id/pantallainicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pantallainicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
