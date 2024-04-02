@@ -45,5 +45,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, Graficas::class.java)
             startActivity(intent)
         }
+
+        val btnConfiguracion5: Button = findViewById(R.id.temperaturaAula)
+
+        btnConfiguracion5.setOnClickListener {
+            val intent = Intent(this, TemperaturaAula::class.java)
+            startActivity(intent)
+        }
     }
 }
