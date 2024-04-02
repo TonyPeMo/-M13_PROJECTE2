@@ -32,6 +32,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val btnPlanta: Button = findViewById(R.id.btn_planta)
+
+        btnPlanta.setOnClickListener {
+            val intent = Intent(this, PlanoPlanta::class.java)
+            startActivity(intent)
+        }
+
         val btnConfiguracion4: Button = findViewById(R.id.graficas)
 
         btnConfiguracion4.setOnClickListener {
