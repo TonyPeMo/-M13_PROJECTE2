@@ -150,6 +150,6 @@
         app:layout_constraintStart_toEndOf="@+id/linearLayout3"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498"
-        tools:srcCompat="@drawable/image2" />
+        android:src="@drawable/image2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
