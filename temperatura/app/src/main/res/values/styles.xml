@@ -42,4 +42,12 @@
         <item name="android:textColor">@color/colorPrincipal</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
+
+    <!-- Estilo para texto normal -->
+    <style name="TextoNegrita">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/colorPrincipal</item>
+        <item name="android:fontFamily">sans-serif</item> <!-- Opcional: puedes usar "Lato" si está disponible en tus recursos -->
+    </style>
+
 </resources>
