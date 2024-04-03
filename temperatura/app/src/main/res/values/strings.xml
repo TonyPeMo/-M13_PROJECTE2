@@ -1,11 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Temperatura</string>
-
     <string name="nombre_usuario">Usuario</string>
     <string name="password">Contraseña</string>
     <string name="reset_password"><u>He olvidado mi contraseña</u></string>
     <string name="login">LOGIN</string>
-
+    <string name="info_aula_titulo"><b><big>Informació aula</big></b></string>
+    <string name="info_aula_temperatura_actual">&#8226; Temperatura actual: <font color="#FFA51E">%s</font></string>
+    <string name="info_aula_temperatura_minima">&#8226; Temperatura mínima: <font color="#0500FF">%s</font></string>
+    <string name="info_aula_temperatura_maxima">&#8226; Temperatura máxima: <font color="#FF0000">%s</font></string>
     <string name="frio">Frio</string>
     <string name="calor">Calor</string>
     <string name="optima">Optima</string>
@@ -28,6 +30,15 @@
     <string name="fecha_inicio">Fecha de inicio</string>
     <string name="fecha_final">Fecha final</string>
 
+
+
+    <string-array name="menu_options">
+        <item>A03 </item>
+        <item>A01</item>
+        <item>A02</item>
+        <item>ATECA</item>
+        <item>A04</item>
+    </string-array>
 
 
 </resources>
