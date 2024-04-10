@@ -144,9 +144,13 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         }
         db.insert("USUARIO", null, values)
         db.close()
+        val iduser = getIdUsuarioPorNombre(username)
+        if (iduser != null) {
+            setConfiguracion(iduser)
+        }
     }
 
-    
+
 
     fun setAula(nombreAula: String, numPlanta: Int) {
         val db = this.writableDatabase
@@ -244,6 +248,36 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db.insert("CONFIGURACION", null, values)
         db.close()
     }
+
+    fun setConfiguracion(idUsuario: Int) {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("ID_USER", idUsuario)
+        }
+        db.insert("CONFIGURACION", null, values)
+        db.close()
+    }
+    fun updateConfiguracion(idUsuario: Int, colorFrio: String, colorOptimo: String, colorCalor: String,
+                            notFrio: Float, notCalor: Float, tFrio: Float, tOptimaMin: Float, tOptimaMax: Float, tCalor: Float) {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("COLOR_FRIO", colorFrio)
+            put("COLOR_OPTIMO", colorOptimo)
+            put("COLOR_CALOR", colorCalor)
+            put("NOT_FRIO", notFrio)
+            put("NOT_CALOR", notCalor)
+            put("T_FRIO", tFrio)
+            put("T_OPTIMA_MIN", tOptimaMin)
+            put("T_OPTIMA_MAX", tOptimaMax)
+            put("T_CALOR", tCalor)
+        }
+        val whereClause = "ID_USER = ?"
+        val whereArgs = arrayOf(idUsuario.toString())
+        db.update("CONFIGURACION", values, whereClause, whereArgs)
+        db.close()
+    }
+
+
 
 
 
