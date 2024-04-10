@@ -17,41 +17,41 @@ import java.util.Locale
 class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int)
     : SQLiteOpenHelper(context, name, factory, version) {
 
-    // Tabla USUARIO
-    private val CREATE_TABLE_USUARIO = "CREATE TABLE USUARIO (" +
-            "ID_USER INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "USERNAME TEXT UNIQUE," +
-            "PASSWORD TEXT NOT NULL)"
+        // Tabla USUARIO
+        private val CREATE_TABLE_USUARIO = "CREATE TABLE USUARIO (" +
+                "ID_USER INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "USERNAME TEXT UNIQUE," +
+                "PASSWORD TEXT NOT NULL)"
 
-    // Tabla CONFIGURACION
-    private val CREATE_TABLE_CONFIGURACION = "CREATE TABLE CONFIGURACION (" +
-            "ID_CONFIG INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "ID_USER INTEGER NOT NULL," +
-            "COLOR_FRIO TEXT DEFAULT '#1C3AFF'," +
-            "COLOR_OPTIMO TEXT DEFAULT '#00FF00'," +
-            "COLOR_CALOR TEXT DEFAULT '#FF0000'," +
-            "NOT_FRIO REAL DEFAULT 18.5," +
-            "NOT_CALOR REAL DEFAULT 23.5," +
-            "T_FRIO REAL DEFAULT 18.5," +
-            "T_OPTIMA_MIN REAL DEFAULT 18.5," +
-            "T_OPTIMA_MAX REAL DEFAULT 23.5," +
-            "T_CALOR REAL DEFAULT 23.5," +
-            "FOREIGN KEY (ID_USER) REFERENCES USUARIO (ID_USER))"
+        // Tabla CONFIGURACION
+        private val CREATE_TABLE_CONFIGURACION = "CREATE TABLE CONFIGURACION (" +
+                "ID_CONFIG INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ID_USER INTEGER NOT NULL," +
+                "COLOR_FRIO TEXT DEFAULT '#1C3AFF'," +
+                "COLOR_OPTIMO TEXT DEFAULT '#00FF00'," +
+                "COLOR_CALOR TEXT DEFAULT '#FF0000'," +
+                "NOT_FRIO REAL DEFAULT 18.5," +
+                "NOT_CALOR REAL DEFAULT 23.5," +
+                "T_FRIO REAL DEFAULT 18.5," +
+                "T_OPTIMA_MIN REAL DEFAULT 18.5," +
+                "T_OPTIMA_MAX REAL DEFAULT 23.5," +
+                "T_CALOR REAL DEFAULT 23.5," +
+                "FOREIGN KEY (ID_USER) REFERENCES USUARIO (ID_USER))"
 
-    // Tabla AULAS
-    private val CREATE_TABLE_AULAS = "CREATE TABLE AULAS (" +
-            "ID_AULA INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "NOM_AULA TEXT UNIQUE," +
-            "NUM_PLANTA INTEGER NOT NULL)"
+        // Tabla AULAS
+        private val CREATE_TABLE_AULAS = "CREATE TABLE AULAS (" +
+                "ID_AULA INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "NOM_AULA TEXT UNIQUE," +
+                "NUM_PLANTA INTEGER NOT NULL)"
 
-    // Tabla REGISTROS
-    private val CREATE_TABLE_REGISTROS = "CREATE TABLE REGISTROS (" +
-            "ID_REGISTRO INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "ID_AULA INTEGER NOT NULL," +
-            "TEMPERATURA REAL NOT NULL," +
-            "TERMOMETRO INTEGER NOT NULL," +
-            "FECHA DATE NOT NULL," +
-            "FOREIGN KEY (ID_AULA) REFERENCES AULAS (ID_AULA))"
+        // Tabla REGISTROS
+        private val CREATE_TABLE_REGISTROS = "CREATE TABLE REGISTROS (" +
+                "ID_REGISTRO INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ID_AULA INTEGER NOT NULL," +
+                "TEMPERATURA REAL NOT NULL," +
+                "TERMOMETRO INTEGER NOT NULL," +
+                "FECHA DATE NOT NULL," +
+                "FOREIGN KEY (ID_AULA) REFERENCES AULAS (ID_AULA))"
 
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(CREATE_TABLE_USUARIO)
@@ -60,75 +60,85 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db?.execSQL(CREATE_TABLE_REGISTROS)
 
 
-        setUser("admin", "admin")
-        setUser("admin2", "1234")
-        // Puedes llamar a las otras funciones de la base de datos de la misma manera
-        setAula("A01", 0)
-        setAula("A02", 0)
-        setAula("A03", 0)
-        setAula("A04", 0)
-        setAula("ATECA", 0)
-
-        setRegistro("A01", 19.5f, 1, "08-04-2024 10:33:00")
-        setRegistro("A01", 20.0f, 2, "08-04-2024 10:30:00")
-
-        setRegistro("A01", 18.5f, 1, "08-04-2024 09:33:00")
-        setRegistro("A01", 19.0f, 2, "08-04-2024 09:31:00")
-
-        setRegistro("A01", 22.5f, 1, "08-04-2024 12:33:00")
-        setRegistro("A01", 22.0f, 2, "08-04-2024 12:29:00")
-
-        setRegistro("A01", 23.5f, 1, "08-04-2024 16:33:00")
-        setRegistro("A01", 29.0f, 2, "08-04-2024 16:33:00")
+//        db?.execSQL("INSERT INTO USUARIO (USERNAME, PASSWORD) VALUES ('admin', 'admin')")
+//        db?.execSQL("INSERT INTO USUARIO (USERNAME, PASSWORD) VALUES ('admin2', '1234')")
 
 
-        setRegistro("A02", 19.0f, 1, "08-04-2024 10:35:00")
-        setRegistro("A02", 20.5f, 2, "08-04-2024 10:40:00")
+        val username = "admin"
+        val password = "admin"
+        val hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt())
 
-        setRegistro("A02", 18.8f, 1, "08-04-2024 09:35:00")
-        setRegistro("A02", 19.2f, 2, "08-04-2024 09:38:00")
+        // Insertar usuario y obtener su ID
+        val usuarioInsertStatement = "INSERT INTO USUARIO (USERNAME, PASSWORD) VALUES (?, ?)"
+        val usuarioId = db?.compileStatement(usuarioInsertStatement).use { statement ->
+            statement?.bindString(1, username)
+            statement?.bindString(2, hashedPassword)
+            statement?.executeInsert()
+        }
 
-        setRegistro("A02", 21.5f, 1, "08-04-2024 12:35:00")
-        setRegistro("A02", 21.0f, 2, "08-04-2024 12:38:00")
+        // Insertar configuración asociada al usuario utilizando su ID
+        usuarioId?.let { id ->
+            val configuracionInsertStatement = "INSERT INTO CONFIGURACION (ID_USER) VALUES (?)"
+            db?.compileStatement(configuracionInsertStatement).use { statement ->
+                statement?.bindLong(1, id)
+                statement?.executeInsert()
+            }
+        }
 
-        setRegistro("A02", 24.0f, 1, "08-04-2024 16:35:00")
-        setRegistro("A02", 28.0f, 2, "08-04-2024 16:38:00")
 
-        setRegistro("A03", 19.2f, 1, "08-04-2024 10:37:00")
-        setRegistro("A03", 20.8f, 2, "08-04-2024 10:42:00")
 
-        setRegistro("A03", 18.6f, 1, "08-04-2024 09:37:00")
-        setRegistro("A03", 19.4f, 2, "08-04-2024 09:40:00")
+        db?.execSQL("INSERT INTO AULAS (NOM_AULA, NUM_PLANTA) VALUES ('A01', 0)")
+        db?.execSQL("INSERT INTO AULAS (NOM_AULA, NUM_PLANTA) VALUES ('A02', 0)")
+        db?.execSQL("INSERT INTO AULAS (NOM_AULA, NUM_PLANTA) VALUES ('A03', 0)")
+        db?.execSQL("INSERT INTO AULAS (NOM_AULA, NUM_PLANTA) VALUES ('A04', 0)")
+        db?.execSQL("INSERT INTO AULAS (NOM_AULA, NUM_PLANTA) VALUES ('ATECA', 0)")
 
-        setRegistro("A03", 21.0f, 1, "08-04-2024 12:37:00")
-        setRegistro("A03", 20.5f, 2, "08-04-2024 12:42:00")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 19.5, 1, '08-04-2024 10:33:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 20.0, 2, '08-04-2024 10:30:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 18.5, 1, '08-04-2024 09:33:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 19.0, 2, '08-04-2024 09:31:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 22.5, 1, '08-04-2024 12:33:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 22.0, 2, '08-04-2024 12:29:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 23.5, 1, '08-04-2024 16:33:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A01', 29.0, 2, '08-04-2024 16:33:00')")
 
-        setRegistro("A03", 23.0f, 1, "08-04-2024 16:37:00")
-        setRegistro("A03", 27.0f, 2, "08-04-2024 16:42:00")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 19.0, 1, '08-04-2024 10:35:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 20.5, 2, '08-04-2024 10:40:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 18.8, 1, '08-04-2024 09:35:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 19.2, 2, '08-04-2024 09:38:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 21.5, 1, '08-04-2024 12:35:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 21.0, 2, '08-04-2024 12:38:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 24.0, 1, '08-04-2024 16:35:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A02', 28.0, 2, '08-04-2024 16:38:00')")
 
-        setRegistro("A04", 19.3f, 1, "08-04-2024 10:45:00")
-        setRegistro("A04", 20.3f, 2, "08-04-2024 10:50:00")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 19.2, 1, '08-04-2024 10:37:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 20.8, 2, '08-04-2024 10:42:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 18.6, 1, '08-04-2024 09:37:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 19.4, 2, '08-04-2024 09:40:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 21.0, 1, '08-04-2024 12:37:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 20.5, 2, '08-04-2024 12:42:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 23.0, 1, '08-04-2024 16:37:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A03', 27.0, 2, '08-04-2024 16:42:00')")
 
-        setRegistro("A04", 18.8f, 1, "08-04-2024 09:45:00")
-        setRegistro("A04", 19.6f, 2, "08-04-2024 09:48:00")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 19.3, 1, '08-04-2024 10:45:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 20.3, 2, '08-04-2024 10:50:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 18.8, 1, '08-04-2024 09:45:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 19.6, 2, '08-04-2024 09:48:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 21.2, 1, '08-04-2024 12:45:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 20.8, 2, '08-04-2024 12:48:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 23.2, 1, '08-04-2024 16:45:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('A04', 27.5, 2, '08-04-2024 16:48:00')")
 
-        setRegistro("A04", 21.2f, 1, "08-04-2024 12:45:00")
-        setRegistro("A04", 20.8f, 2, "08-04-2024 12:48:00")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 19.8, 1, '08-04-2024 10:55:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 20.7, 2, '08-04-2024 11:00:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 18.7, 1, '08-04-2024 09:55:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 19.9, 2, '08-04-2024 09:58:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 21.8, 1, '08-04-2024 12:55:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 21.5, 2, '08-04-2024 13:00:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 23.8, 1, '08-04-2024 16:55:00')")
+        db?.execSQL("INSERT INTO REGISTROS (ID_AULA, TEMPERATURA, TERMOMETRO, FECHA) VALUES ('ATECA', 29.2, 2, '08-04-2024 17:00:00')")
 
-        setRegistro("A04", 23.2f, 1, "08-04-2024 16:45:00")
-        setRegistro("A04", 27.5f, 2, "08-04-2024 16:48:00")
 
-        setRegistro("ATECA", 19.8f, 1, "08-04-2024 10:55:00")
-        setRegistro("ATECA", 20.7f, 2, "08-04-2024 11:00:00")
-
-        setRegistro("ATECA", 18.7f, 1, "08-04-2024 09:55:00")
-        setRegistro("ATECA", 19.9f, 2, "08-04-2024 09:58:00")
-
-        setRegistro("ATECA", 21.8f, 1, "08-04-2024 12:55:00")
-        setRegistro("ATECA", 21.5f, 2, "08-04-2024 13:00:00")
-
-        setRegistro("ATECA", 23.8f, 1, "08-04-2024 16:55:00")
-        setRegistro("ATECA", 29.2f, 2, "08-04-2024 17:00:00")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
