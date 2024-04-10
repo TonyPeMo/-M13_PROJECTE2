@@ -37,8 +37,6 @@
         <activity
             android:name=".Graficas"
             android:exported="false" />
-        <activity android:name=".BaseDatosAPP" />
-        <activity android:name=".ValoresDatabase" />
 
         <activity
             android:name=".MainActivity"
