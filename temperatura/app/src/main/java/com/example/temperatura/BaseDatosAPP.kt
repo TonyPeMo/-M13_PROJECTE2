@@ -59,13 +59,76 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db?.execSQL(CREATE_TABLE_AULAS)
         db?.execSQL(CREATE_TABLE_REGISTROS)
 
-        // Contraseña del usuario
-        val password = "admin"
-        // Hashear la contraseña
-        val hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt())
-        // Insertar el usuario en la tabla USUARIO
-        val insertQuery = "INSERT INTO USUARIO (USERNAME, PASSWORD) VALUES ('admin', '$hashedPassword')"
-        db?.execSQL(insertQuery)
+
+        setUser("admin", "admin")
+        setUser("admin2", "1234")
+        // Puedes llamar a las otras funciones de la base de datos de la misma manera
+        setAula("A01", 0)
+        setAula("A02", 0)
+        setAula("A03", 0)
+        setAula("A04", 0)
+        setAula("ATECA", 0)
+
+        setRegistro("A01", 19.5f, 1, "08-04-2024 10:33:00")
+        setRegistro("A01", 20.0f, 2, "08-04-2024 10:30:00")
+
+        setRegistro("A01", 18.5f, 1, "08-04-2024 09:33:00")
+        setRegistro("A01", 19.0f, 2, "08-04-2024 09:31:00")
+
+        setRegistro("A01", 22.5f, 1, "08-04-2024 12:33:00")
+        setRegistro("A01", 22.0f, 2, "08-04-2024 12:29:00")
+
+        setRegistro("A01", 23.5f, 1, "08-04-2024 16:33:00")
+        setRegistro("A01", 29.0f, 2, "08-04-2024 16:33:00")
+
+
+        setRegistro("A02", 19.0f, 1, "08-04-2024 10:35:00")
+        setRegistro("A02", 20.5f, 2, "08-04-2024 10:40:00")
+
+        setRegistro("A02", 18.8f, 1, "08-04-2024 09:35:00")
+        setRegistro("A02", 19.2f, 2, "08-04-2024 09:38:00")
+
+        setRegistro("A02", 21.5f, 1, "08-04-2024 12:35:00")
+        setRegistro("A02", 21.0f, 2, "08-04-2024 12:38:00")
+
+        setRegistro("A02", 24.0f, 1, "08-04-2024 16:35:00")
+        setRegistro("A02", 28.0f, 2, "08-04-2024 16:38:00")
+
+        setRegistro("A03", 19.2f, 1, "08-04-2024 10:37:00")
+        setRegistro("A03", 20.8f, 2, "08-04-2024 10:42:00")
+
+        setRegistro("A03", 18.6f, 1, "08-04-2024 09:37:00")
+        setRegistro("A03", 19.4f, 2, "08-04-2024 09:40:00")
+
+        setRegistro("A03", 21.0f, 1, "08-04-2024 12:37:00")
+        setRegistro("A03", 20.5f, 2, "08-04-2024 12:42:00")
+
+        setRegistro("A03", 23.0f, 1, "08-04-2024 16:37:00")
+        setRegistro("A03", 27.0f, 2, "08-04-2024 16:42:00")
+
+        setRegistro("A04", 19.3f, 1, "08-04-2024 10:45:00")
+        setRegistro("A04", 20.3f, 2, "08-04-2024 10:50:00")
+
+        setRegistro("A04", 18.8f, 1, "08-04-2024 09:45:00")
+        setRegistro("A04", 19.6f, 2, "08-04-2024 09:48:00")
+
+        setRegistro("A04", 21.2f, 1, "08-04-2024 12:45:00")
+        setRegistro("A04", 20.8f, 2, "08-04-2024 12:48:00")
+
+        setRegistro("A04", 23.2f, 1, "08-04-2024 16:45:00")
+        setRegistro("A04", 27.5f, 2, "08-04-2024 16:48:00")
+
+        setRegistro("ATECA", 19.8f, 1, "08-04-2024 10:55:00")
+        setRegistro("ATECA", 20.7f, 2, "08-04-2024 11:00:00")
+
+        setRegistro("ATECA", 18.7f, 1, "08-04-2024 09:55:00")
+        setRegistro("ATECA", 19.9f, 2, "08-04-2024 09:58:00")
+
+        setRegistro("ATECA", 21.8f, 1, "08-04-2024 12:55:00")
+        setRegistro("ATECA", 21.5f, 2, "08-04-2024 13:00:00")
+
+        setRegistro("ATECA", 23.8f, 1, "08-04-2024 16:55:00")
+        setRegistro("ATECA", 29.2f, 2, "08-04-2024 17:00:00")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -83,24 +146,7 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db.close()
     }
 
-    fun setConfiguracion(
-        idUsuario: Int, colorFrio: String, colorOptimo: String, colorCalor: String, notFrio: Float, notCalor: Float, tFrio: Float, tOptimaMin: Float, tOptimaMax: Float, tCalor: Float) {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put("ID_USER", idUsuario)
-            put("COLOR_FRIO", colorFrio)
-            put("COLOR_OPTIMO", colorOptimo)
-            put("COLOR_CALOR", colorCalor)
-            put("NOT_FRIO", notFrio)
-            put("NOT_CALOR", notCalor)
-            put("T_FRIO", tFrio)
-            put("T_OPTIMA_MIN", tOptimaMin)
-            put("T_OPTIMA_MAX", tOptimaMax)
-            put("T_CALOR", tCalor)
-        }
-        db.insert("CONFIGURACION", null, values)
-        db.close()
-    }
+    
 
     fun setAula(nombreAula: String, numPlanta: Int) {
         val db = this.writableDatabase
@@ -149,6 +195,57 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db.insert("REGISTROS", null, values)
         db.close()
     }
+
+    fun setRegistro(idAula: Int, temperatura: Float, termometro: Int, fechaString: String) {
+        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
+        val fecha = sdf.parse(fechaString)
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("ID_AULA", idAula)
+            put("TEMPERATURA", temperatura)
+            put("TERMOMETRO", termometro)
+            put("FECHA", fecha.time) // Convertir la fecha a milisegundos
+        }
+        db.insert("REGISTROS", null, values)
+        db.close()
+    }
+
+    @SuppressLint("Range")
+    fun getIdUsuarioPorNombre(nombreUsuario: String): Int? {
+        var idUsuario: Int? = null
+        val db = this.readableDatabase
+        val query = "SELECT ID_USER FROM USUARIO WHERE USERNAME = ?"
+        val cursor: Cursor? = db.rawQuery(query, arrayOf(nombreUsuario))
+
+        cursor?.use {
+            if (cursor.moveToFirst()) {
+                idUsuario = cursor.getInt(cursor.getColumnIndex("ID_USER"))
+            }
+        }
+
+        cursor?.close()
+        db.close()
+        return idUsuario
+    }
+    fun setConfiguracion(idUsuario: Int,colorFrio: String,colorOptimo: String,colorCalor: String,notFrio: Float,notCalor: Float,tFrio: Float,tOptimaMin: Float,tOptimaMax: Float,tCalor: Float    ) {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put("ID_USER", idUsuario)
+            put("COLOR_FRIO", colorFrio)
+            put("COLOR_OPTIMO", colorOptimo)
+            put("COLOR_CALOR", colorCalor)
+            put("NOT_FRIO", notFrio)
+            put("NOT_CALOR", notCalor)
+            put("T_FRIO", tFrio)
+            put("T_OPTIMA_MIN", tOptimaMin)
+            put("T_OPTIMA_MAX", tOptimaMax)
+            put("T_CALOR", tCalor)
+        }
+        db.insert("CONFIGURACION", null, values)
+        db.close()
+    }
+
+
 
 
     @SuppressLint("Range")
