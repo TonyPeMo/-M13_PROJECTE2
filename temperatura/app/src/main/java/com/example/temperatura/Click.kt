@@ -40,4 +40,10 @@ class Click : AppCompatActivity(){
         val intent = Intent(this, PantallaInicio::class.java).apply {}
         startActivity(intent);
     }
+
+
+    fun toAtras(view: View) {
+        onBackPressed()
+    }
+
 }

@@ -21,6 +21,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="8dp"
+            android:onClick="toConfiguracion"
             android:src="@drawable/icon_config" />
 
 
@@ -64,26 +65,27 @@
                 style="@style/Texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Planta 0"
-                android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                />
+                android:onClick="toPlanta"
+                android:text="Planta 0"
+                android:textSize="20dp" />
 
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/icon_config"
                 android:layout_gravity="center"
-                android:layout_marginStart="80dp"/>
+                android:layout_marginStart="80dp"
+                android:onClick="toGrafico"
+                android:src="@drawable/ic_graph" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/borde_planta_pantalla_principal"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
 
 
             <TextView
@@ -91,17 +93,18 @@
                 style="@style/Texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Planta 4"
-                android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                />
+                android:onClick="toPlanta"
+                android:text="Planta 4"
+                android:textSize="20dp" />
 
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/icon_config"
                 android:layout_gravity="center"
-                android:layout_marginStart="80dp"/>
+                android:layout_marginStart="80dp"
+                android:onClick="toGrafico"
+                android:src="@drawable/ic_graph" />
 
         </LinearLayout>
 
@@ -118,21 +121,23 @@
                 style="@style/Texto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Planta 5"
-                android:textSize="20dp"
                 android:layout_marginStart="20dp"
-                />
+                android:onClick="toPlanta"
+                android:text="Planta 5"
+                android:textSize="20dp" />
 
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/icon_config"
                 android:layout_gravity="center"
-                android:layout_marginStart="80dp"/>
+                android:layout_marginStart="80dp"
+                android:onClick="toGrafico"
+                android:src="@drawable/ic_graph" />
 
         </LinearLayout>
 
     </LinearLayout>
+
 
     <ImageView
         android:id="@+id/img_edificio"
@@ -142,12 +147,13 @@
         android:translationX="380dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-8
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="26dp"
+        android:onClick="toLogin"
         android:text="Cerrar sesión"
         android:textColor="#A10D0D"
         app:layout_constraintBottom_toBottomOf="parent"

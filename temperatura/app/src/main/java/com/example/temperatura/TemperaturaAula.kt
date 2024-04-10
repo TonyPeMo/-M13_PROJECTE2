@@ -80,4 +80,9 @@ class TemperaturaAula : AppCompatActivity() {
         )
         return spannableString
     }
+
+    fun toAtras(view: View) {
+        onBackPressed()
+    }
+
 }
