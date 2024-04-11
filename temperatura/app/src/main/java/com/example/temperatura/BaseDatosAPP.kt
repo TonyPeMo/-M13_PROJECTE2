@@ -13,7 +13,8 @@ import java.util.Date
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-
+//private var baseDatos= BaseDatosAPP(this, "temperaturaDB", null, 1)
+//    baseDatos.setUser("test", "admin")
 class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int)
     : SQLiteOpenHelper(context, name, factory, version) {
 
