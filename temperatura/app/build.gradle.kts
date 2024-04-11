@@ -52,6 +52,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.github.skydoves/colorpickerpreference
     implementation ("com.github.yukuku:ambilwarna:2.0.1")
+    implementation ("org.mindrot:jbcrypt:0.4")
 
 
 }
