@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_land)
 
 
+        baseDatos.setUser("test", "admin")
 
-        baseDatos.setUser("test","1234")
 
         val btnConfiguracion: Button = findViewById(R.id.btnConfiguracion)
 
