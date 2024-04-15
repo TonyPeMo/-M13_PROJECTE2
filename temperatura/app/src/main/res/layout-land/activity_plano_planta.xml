@@ -68,10 +68,12 @@
         app:layout_constraintStart_toStartOf="@id/linearEncabezado"
         app:layout_constraintTop_toBottomOf="@+id/linearEncabezado" />
 
-    <!-- Aula -->
+
 
     <!-- Otra vista -->
 
+
+    <!-- AULA03-->
     <ImageView
         android:id="@+id/aula03"
         android:layout_width="140dp"
@@ -83,6 +85,21 @@
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.667" />
 
+    <TextView
+        android:id="@+id/temperaturaaula03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/aula03"
+        app:layout_constraintEnd_toEndOf="@id/aula03"
+        app:layout_constraintStart_toStartOf="@id/aula03"
+        app:layout_constraintTop_toTopOf="@id/aula03" />
+
+
+    <!-- AULA04-->
     <ImageView
         android:id="@+id/aula04"
         android:layout_width="140dp"
@@ -94,7 +111,22 @@
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.438" />
 
+    <TextView
+        android:id="@+id/temperaturaaula04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/aula04"
+        app:layout_constraintEnd_toEndOf="@id/aula04"
+        app:layout_constraintStart_toStartOf="@id/aula04"
+        app:layout_constraintTop_toTopOf="@id/aula04" />
 
+
+
+    <!-- AULAATECA-->
     <ImageView
         android:id="@+id/aulaAteca"
         android:layout_width="167dp"
@@ -105,6 +137,23 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.456" />
+
+
+    <TextView
+        android:id="@+id/temperaturaaulaAteca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/aulaAteca"
+        app:layout_constraintEnd_toEndOf="@id/aulaAteca"
+        app:layout_constraintStart_toStartOf="@id/aulaAteca"
+        app:layout_constraintTop_toTopOf="@id/aulaAteca" />
+
+
+    <!-- AULA2-->
 
     <ImageView
         android:id="@+id/aula2"
@@ -117,6 +166,23 @@
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.465" />
 
+    <TextView
+        android:id="@+id/temperaturaaula2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/aula2"
+        app:layout_constraintEnd_toEndOf="@id/aula2"
+        app:layout_constraintStart_toStartOf="@id/aula2"
+        app:layout_constraintTop_toTopOf="@id/aula2" />
+
+
+
+    <!-- AULA1-->
+
     <ImageView
         android:id="@+id/aula1"
         android:layout_width="124dp"
@@ -127,6 +193,19 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.771" />
+
+    <TextView
+        android:id="@+id/temperaturaaula1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        tools:text="prueba"
+        app:layout_constraintBottom_toBottomOf="@id/aula1"
+        app:layout_constraintEnd_toEndOf="@id/aula1"
+        app:layout_constraintStart_toStartOf="@id/aula1"
+        app:layout_constraintTop_toTopOf="@id/aula1" />
 
     <ImageView
         android:id="@+id/img_graficos"
