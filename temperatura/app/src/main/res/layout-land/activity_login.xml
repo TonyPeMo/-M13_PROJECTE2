@@ -54,19 +54,6 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/resetPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginBottom="80dp"
-        android:text="@string/reset_password"
-        android:textColor="@color/colorLetraLogin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.234" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="317dp"
@@ -84,16 +71,14 @@
         android:layout_width="118dp"
         android:layout_height="43dp"
         android:layout_marginStart="196dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="75dp"
         android:backgroundTint="@color/colorBotonLogin"
         android:elevation="10dp"
+        android:onClick="toInicio"
         android:text="@string/login"
         android:textColor="@color/colorPrincipal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetPassword"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

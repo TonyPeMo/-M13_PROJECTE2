@@ -1,10 +1,11 @@
 package com.example.temperatura
-
-import android.graphics.Color
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.graphics.Color
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 
 class PlanoPlanta : AppCompatActivity() {
 
@@ -31,6 +32,15 @@ class PlanoPlanta : AppCompatActivity() {
             temperatureTextView.text = "${temperatura.toString()} ºC"
 
         }
+    }
+
+    fun toAtras(view: View) {
+        onBackPressed()
+    }
+
+    fun toGrafico(view: View) {
+        val intent = Intent(this, Graficas::class.java).apply{}
+        startActivity(intent);
     }
 
     // Método para determinar el color en función de la temperatura

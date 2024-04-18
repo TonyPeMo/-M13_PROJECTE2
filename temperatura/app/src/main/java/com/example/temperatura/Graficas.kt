@@ -107,4 +107,8 @@ class Graficas : AppCompatActivity() {
 
         timePicker.show(supportFragmentManager, "timePicker")
     }
+
+    fun toAtras(view: View) {
+        onBackPressed()
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.temperatura
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -20,5 +21,10 @@ class Login : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    fun toInicio(view: View) {
+        val intent = Intent(this, PantallaInicio::class.java).apply {}
+        startActivity(intent);
     }
 }
