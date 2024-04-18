@@ -1,6 +1,6 @@
 package com.example.temperatura
 
-
+/*
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -61,3 +61,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+*/

@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,8 +7,9 @@
     tools:context=".PlanoPlanta"
     tools:ignore="ExtraText,MissingDefaultResource">
 
+    <!-- Encabezado -->
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearEncabezado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -26,11 +25,9 @@
             <ImageView
                 android:id="@+id/backButton"
                 android:layout_width="12dp"
-                android:layout_height="14dp"
+                android:layout_height="20dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                android:onClick="toAtras"
-
                 android:src="@drawable/icon_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -68,8 +65,8 @@
         android:src="@drawable/plano_planta_0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintStart_toStartOf="@id/linearEncabezado"
+        app:layout_constraintTop_toBottomOf="@+id/linearEncabezado" />
 
 
 
@@ -93,14 +90,70 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
+        android:background="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@id/aula03"
         app:layout_constraintEnd_toEndOf="@id/aula03"
         app:layout_constraintStart_toStartOf="@id/aula03"
         app:layout_constraintTop_toTopOf="@id/aula03" />
 
 
+    <!-- AULA04-->
+    <ImageView
+        android:id="@+id/aula04"
+        android:layout_width="140dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="88dp"
+        android:background="#752ADD2A"
+        app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
+        app:layout_constraintStart_toStartOf="@+id/mapaTemp"
+        app:layout_constraintTop_toTopOf="@+id/mapaTemp"
+        app:layout_constraintVertical_bias="0.438" />
+
+    <TextView
+        android:id="@+id/temperaturaaula04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/aula04"
+        app:layout_constraintEnd_toEndOf="@id/aula04"
+        app:layout_constraintStart_toStartOf="@id/aula04"
+        app:layout_constraintTop_toTopOf="@id/aula04" />
+
+
+
+    <!-- AULAATECA-->
+    <ImageView
+        android:id="@+id/aulaAteca"
+        android:layout_width="167dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="228dp"
+        android:background="#752ADD2A"
+        app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
+        app:layout_constraintStart_toStartOf="@+id/mapaTemp"
+        app:layout_constraintTop_toTopOf="@+id/mapaTemp"
+        app:layout_constraintVertical_bias="0.456" />
+
+
+    <TextView
+        android:id="@+id/temperaturaaulaAteca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/aulaAteca"
+        app:layout_constraintEnd_toEndOf="@id/aulaAteca"
+        app:layout_constraintStart_toStartOf="@id/aulaAteca"
+        app:layout_constraintTop_toTopOf="@id/aulaAteca" />
+
+
+    <!-- AULA2-->
 
     <ImageView
         android:id="@+id/aula2"
@@ -118,8 +171,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
+        android:background="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@id/aula2"
         app:layout_constraintEnd_toEndOf="@id/aula2"
         app:layout_constraintStart_toStartOf="@id/aula2"
@@ -157,14 +211,10 @@
         android:id="@+id/img_graficos"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="toGrafico"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/ic_graph"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
