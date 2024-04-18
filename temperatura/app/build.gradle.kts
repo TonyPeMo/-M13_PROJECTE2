@@ -49,10 +49,10 @@ dependencies {
     implementation ("androidx.cardview:cardview:1.0.0")
     implementation ("com.google.android.material:material:1.5.0-alpha01")
 
-
+    implementation ("org.mindrot:jbcrypt:0.4")
     // https://mvnrepository.com/artifact/com.github.skydoves/colorpickerpreference
     implementation ("com.github.yukuku:ambilwarna:2.0.1")
-    implementation ("org.mindrot:jbcrypt:0.4")
+
 
 
 }
