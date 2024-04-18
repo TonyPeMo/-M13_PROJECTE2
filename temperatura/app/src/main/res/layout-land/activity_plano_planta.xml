@@ -28,6 +28,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
+                android:onClick="toAtras"
                 android:src="@drawable/icon_back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -213,6 +214,7 @@
         android:layout_height="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:onClick="toGrafico"
         android:src="@drawable/ic_graph"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

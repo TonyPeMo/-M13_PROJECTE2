@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/borde_planta_pantalla_principal"
             android:orientation="horizontal"
+            android:onClick="toPlanta"
             android:layout_marginBottom="16dp">
 
 
@@ -66,7 +67,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:onClick="toPlanta"
                 android:text="Planta 0"
                 android:textSize="20dp" />
 
@@ -85,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/borde_planta_pantalla_principal"
+            android:onClick="toPlanta"
             android:orientation="horizontal">
 
 
@@ -94,7 +95,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:onClick="toPlanta"
                 android:text="Planta 4"
                 android:textSize="20dp" />
 
@@ -113,7 +113,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/borde_planta_pantalla_principal"
             android:orientation="horizontal"
+            android:onClick="toPlanta"
             android:layout_marginBottom="16dp">
+
 
 
             <TextView
@@ -122,7 +124,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:onClick="toPlanta"
                 android:text="Planta 5"
                 android:textSize="20dp" />
 

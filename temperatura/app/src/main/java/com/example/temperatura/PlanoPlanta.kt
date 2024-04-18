@@ -43,6 +43,7 @@ class PlanoPlanta : AppCompatActivity() {
         startActivity(intent);
     }
 
+
     // Método para determinar el color en función de la temperatura
     private fun getColorFromTemperature(temperature: Double): Int {
         return when {

@@ -3,6 +3,7 @@ package com.example.temperatura
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 
 class PantallaInicio : AppCompatActivity() {
@@ -22,9 +23,11 @@ class PantallaInicio : AppCompatActivity() {
     }
 
     fun toPlanta(view: View) {
-        val intent = Intent(this, PlanoPlanta::class.java).apply{}
-        startActivity(intent);
+        Log.d("PantallaInicio", "Se hizo clic en toPlanta()")
+        val intent = Intent(this, PlanoPlanta::class.java)
+        startActivity(intent)
     }
+
 
     fun toConfiguracion(view: View) {
         val intent = Intent(this, Configuracion::class.java).apply {}
