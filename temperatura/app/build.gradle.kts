@@ -52,7 +52,7 @@ dependencies {
     implementation ("org.mindrot:jbcrypt:0.4")
     // https://mvnrepository.com/artifact/com.github.skydoves/colorpickerpreference
     implementation ("com.github.yukuku:ambilwarna:2.0.1")
-
+    implementation("mysql:mysql-connector-java:8.0.28")
 
 
 }

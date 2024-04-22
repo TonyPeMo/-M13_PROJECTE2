@@ -374,6 +374,39 @@ class MySQLDatabase(private val url: String, private val username: String, priva
         return registros
     }
 
+
+    @SuppressLint("Range")
+    fun getRegistrosPorAulaId(nombreAula: String): List<Registro> {
+        val registros = mutableListOf<Registro>()
+        val query = GET_REGISTROS_BY_AULA_ID
+        val idAula = getIdAulaPorNombre(nombreAula)
+
+        try {
+            val preparedStatement: PreparedStatement = connection!!.prepareStatement(query)
+            if (idAula != null) {
+                preparedStatement.setInt(1, idAula)
+            }
+            val resultSet: ResultSet = preparedStatement.executeQuery()
+
+            while (resultSet.next()) {
+                val idRegistro = resultSet.getInt("ID_REGISTRO")
+                val temperatura = resultSet.getFloat("TEMPERATURA")
+                val termometro = resultSet.getInt("TERMOMETRO")
+                val fechaLong = resultSet.getLong("FECHA")
+                val fecha = Date(fechaLong)
+                val registro = Registro(idRegistro, idAula!!, temperatura, termometro, fecha)
+                registros.add(registro)
+            }
+
+            resultSet.close()
+            preparedStatement.close()
+        } catch (e: SQLException) {
+            println("Error al ejecutar la consulta: ${e.message}")
+        }
+
+        return registros
+    }
+
     private val GET_REGISTROS_BY_FECHA = "SELECT * FROM REGISTROS WHERE FECHA BETWEEN ? AND ?"
 
     @SuppressLint("Range")
