@@ -50,11 +50,11 @@ class MySQLDatabase(private val url: String, private val username: String, priva
 
     fun createTables() {
         val statements = arrayOf(
-            "CREATE TABLE IF NOT EXIST USUARIO (ID_USER INT AUTO_INCREMENT PRIMARY KEY," +
+            "CREATE TABLE IF NOT EXISTS USUARIO (ID_USER INT AUTO_INCREMENT PRIMARY KEY," +
                     " USERNAME VARCHAR(255) UNIQUE," +
                     " PASSWORD TEXT NOT NULL)",
 
-            "CREATE TABLE IF NOT EXIST CONFIGURACION (ID_CONFIG INT AUTO_INCREMENT PRIMARY KEY," +
+            "CREATE TABLE IF NOT EXISTS CONFIGURACION (ID_CONFIG INT AUTO_INCREMENT PRIMARY KEY," +
                     " ID_USER INT NOT NULL," +
                     " COLOR_FRIO VARCHAR(7) DEFAULT '#1C3AFF'," +
                     " COLOR_OPTIMO VARCHAR(7) DEFAULT '#00FF00'," +
@@ -67,11 +67,11 @@ class MySQLDatabase(private val url: String, private val username: String, priva
                     " T_CALOR FLOAT DEFAULT 23.5," +
                     " FOREIGN KEY (ID_USER) REFERENCES USUARIO(ID_USER))",
 
-            "CREATE TABLE IF NOT EXIST AULAS (ID_AULA INT AUTO_INCREMENT PRIMARY KEY," +
+            "CREATE TABLE IF NOT EXISTS AULAS (ID_AULA INT AUTO_INCREMENT PRIMARY KEY," +
                     " NOM_AULA VARCHAR(255) UNIQUE," +
                     " NUM_PLANTA INT NOT NULL)",
 
-            "CREATE TABLE IF NOT EXIST REGISTROS (ID_REGISTRO INT AUTO_INCREMENT PRIMARY KEY," +
+            "CREATE TABLE IF NOT EXISTS REGISTROS (ID_REGISTRO INT AUTO_INCREMENT PRIMARY KEY," +
                     " ID_AULA INT NOT NULL, TEMPERATURA FLOAT NOT NULL," +
                     " TERMOMETRO INT NOT NULL," +
                     " FECHA DATETIME NOT NULL," +
