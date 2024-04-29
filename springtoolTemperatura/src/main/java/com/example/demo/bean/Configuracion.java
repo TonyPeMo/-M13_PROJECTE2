@@ -16,31 +16,31 @@ public class Configuracion {
     @JoinColumn(name = "ID_USER")
     private Usuario usuario;
 
-    @Column(name = "COLOR_FRIO", length = 7)
+    @Column(name = "COLOR_FRIO", length = 7, columnDefinition = "varchar(7) default '#1C3AFF'")
     private String colorFrio;
 
-    @Column(name = "COLOR_OPTIMO", length = 7)
+    @Column(name = "COLOR_OPTIMO", length = 7, columnDefinition = "varchar(7) default '#00FF00'")
     private String colorOptimo;
 
-    @Column(name = "COLOR_CALOR", length = 7)
+    @Column(name = "COLOR_CALOR", length = 7, columnDefinition = "varchar(7) default '#FF0000'")
     private String colorCalor;
 
-    @Column(name = "NOT_FRIO")
+    @Column(name = "NOT_FRIO", columnDefinition = "float default 18.5")
     private float notFrio;
 
-    @Column(name = "NOT_CALOR")
+    @Column(name = "NOT_CALOR", columnDefinition = "float default 23.5")
     private float notCalor;
 
-    @Column(name = "T_FRIO")
+    @Column(name = "T_FRIO", columnDefinition = "float default 18.5")
     private float tFrio;
 
-    @Column(name = "T_OPTIMA_MIN")
+    @Column(name = "T_OPTIMA_MIN", columnDefinition = "float default 18.5")
     private float tOptimaMin;
 
-    @Column(name = "T_OPTIMA_MAX")
+    @Column(name = "T_OPTIMA_MAX", columnDefinition = "float default 23.5")
     private float tOptimaMax;
 
-    @Column(name = "T_CALOR")
+    @Column(name = "T_CALOR", columnDefinition = "float default 23.5")
     private float tCalor;
 
     // Constructor, getters y setters
