@@ -19,7 +19,6 @@ public class Usuario {
     
     // Relacion con Configuracion
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_USER") // Nombre de la columna en la tabla Configuracion que referencia a Usuario
     private Configuracion configuracion;
 
     // Constructor, getters y setters
