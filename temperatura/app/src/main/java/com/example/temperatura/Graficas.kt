@@ -1,15 +1,26 @@
 package com.example.temperatura
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.echo.holographlibrary.Line
+import com.echo.holographlibrary.LineGraph
+import com.echo.holographlibrary.LinePoint
+import com.echo.holographlibrary.PieGraph
+import com.echo.holographlibrary.PieSlice
+//import com.example.temperatura.data.RegistroLine
+import com.example.temperatura.data.Registro
+import com.example.temperatura.databinding.ActivityGraficasBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Graficas : AppCompatActivity() {
 
@@ -24,10 +35,76 @@ class Graficas : AppCompatActivity() {
     private lateinit var selectedDateFinal: Date
     private lateinit var selectedTimeFinal: Date
 
+    //Graficas View
+    private  lateinit var binding : ActivityGraficasBinding
+    private  lateinit var pieGrafica: PieGraph
+    //private  lateinit var lineGrafica: LineGraph
+    private var listaRegistrosPastel: ArrayList<Registro> = ArrayList()
+    //private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
+
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_graficas)
+        //setContentView(R.layout.activity_graficas)
+
+        // GRAFICAS PASTEL
+        binding = ActivityGraficasBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        pieGrafica = findViewById(R.id.graphPie) as PieGraph
+
+        binding.btnGuardar.setOnClickListener{
+
+            listaRegistrosPastel.add(Registro("reg1", 18.50f, "#006400"))
+            listaRegistrosPastel.add(Registro("reg2", 24.50f, "#228B22"))
+            listaRegistrosPastel.add(Registro("reg3", 16.50f, "#808000"))
+            listaRegistrosPastel.add(Registro("reg4", 20.50f, "#00FF00"))
+            listaRegistrosPastel.add(Registro("reg5", 21.10f, "#7FFF00"))
+            listaRegistrosPastel.add(Registro("reg6", 18.70f, "#00FF7F"))
+        }
+
+        binding.btnGenerar.setOnClickListener { graficarPie() }
+
+/*
+        // GRAFICAS LINEA
+        binding = ActivityGraficasBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        lineGrafica = findViewById(R.id.graphLine) as LineGraph
+
+        binding.btnGuardar.setOnClickListener{
+
+            listaRegistrosLine.add(RegistroLine(20.50f,1))
+            listaRegistrosLine.add(RegistroLine(22.50f,2))
+            listaRegistrosLine.add(RegistroLine(21.50f,3))
+
+
+
+        }
+
+        binding.btnGenerar.setOnClickListener { graficarLine() }
+
+
+        fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double): Line {
+            val punto = LinePoint()
+            punto.setX(ejeX)
+            punto.setY(ejeY)
+            linea.addPoint(punto)
+
+            binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y:$ejeY"
+
+            return linea
+        }
+
+        fun graficar(linea: Line) {
+            binding.lineGrafica.addLine(linea)
+            binding.lineGrafica.setRangeX(1f, 4f)
+            binding.lineGrafica.setRangeY(0f, 10f)
+            binding.lineGrafica.lineToFill = 0
+        }
+*/
+
 
         // Inicio
         selectedDateTextView_inicio = findViewById(R.id.textViewDatePicker_inicio)
@@ -57,6 +134,15 @@ class Graficas : AppCompatActivity() {
         selectedTimeFinal = currentDate.time
     }
 
+
+    fun graficarPie (){
+        for (i in 0 until listaRegistrosPastel.size) {
+            val rebanada = PieSlice()
+            rebanada.color = Color.parseColor(listaRegistrosPastel[i].color)
+            rebanada.value = listaRegistrosPastel[i].temperatura.toString().toFloat()
+            pieGrafica.addSlice(rebanada)
+        }
+    }
     fun showDatePicker(view: View) {
         val datePicker =
             MaterialDatePicker.Builder.datePicker()
