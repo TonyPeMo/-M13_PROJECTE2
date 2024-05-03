@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.bean.Configuracion;
 import com.example.demo.bean.Usuario;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ConfiguracionRepository;
 import com.example.demo.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +14,18 @@ import java.util.List;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioRepository usuarioService;
+    private final UsuarioRepository usuarioService;
 
-    @Autowired
-    private ConfiguracionRepository configuracionRepository;
+    private final ConfiguracionRepository configuracionRepository;
+
+    public UsuarioController(ConfiguracionRepository configuracionRepository, UsuarioRepository usuarioService) {
+        this.configuracionRepository = configuracionRepository;
+        this.usuarioService = usuarioService;
+    }
 
     @GetMapping
     public List<Usuario> getAllUsuarios() {
-        return usuarioService.getAllUsuarios();
+        return usuarioService.findAll();
     }
 
     @PostMapping
@@ -39,12 +43,20 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public Usuario updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
-        return usuarioService.updateUsuario(id, usuario);
+    public Usuario updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioDetails) {
+        Usuario usuario = usuarioService.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", id));
+
+        // Aquí puedes actualizar los campos del usuario
+        usuario.setUsername(usuarioDetails.getUsername());
+        usuario.setPassword(usuarioDetails.getPassword());
+        // Asegúrate de actualizar todos los campos que quieras cambiar
+
+        return usuarioService.save(usuario);
     }
 
     @DeleteMapping("/{id}")
     public void deleteUsuario(@PathVariable Integer id) {
-        usuarioService.deleteUsuarioBy(id);
+        usuarioService.deleteUsuarioByIdUser(id);
     }
 }

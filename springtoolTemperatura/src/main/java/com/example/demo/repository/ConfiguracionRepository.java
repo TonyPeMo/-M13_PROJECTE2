@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConfiguracionRepository extends JpaRepository<Configuracion, Integer> {
     Configuracion findByUsuario(Usuario usuario);
+    Configuracion findByIdConfig(Integer idConfig);
 
 }

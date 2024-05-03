@@ -13,7 +13,7 @@ public class Registros {
     private int idRegistro;
 
     @ManyToOne
-    @JoinColumn(name = "ID_AULA", nullable = false)
+    @JoinColumn(name = "ID_AULA")
     private Aulas aulas;
 
     @Column(name = "TEMPERATURA", nullable = false)

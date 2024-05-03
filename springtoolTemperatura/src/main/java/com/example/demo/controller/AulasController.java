@@ -15,11 +15,14 @@ import java.util.List;
 @RequestMapping("/aulas")
 public class AulasController {
 
-    @Autowired
-    private RegistrosRepository registrosRepository;
+    private final RegistrosRepository registrosRepository;
 
-    @Autowired
-    private AulasRepository aulasRepository;
+    private final AulasRepository aulasRepository;
+
+    public AulasController(RegistrosRepository registrosRepository, AulasRepository aulasRepository) {
+        this.registrosRepository = registrosRepository;
+        this.aulasRepository = aulasRepository;
+    }
 
     // guarda un registro en una aula por ID
     @PostMapping("/{id}/registros")

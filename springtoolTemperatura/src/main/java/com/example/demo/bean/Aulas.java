@@ -20,7 +20,7 @@ public class Aulas {
     private int numPlanta;
 
     // Relacion con Configuracion
-    @OneToMany(mappedBy = "aula", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "aulas", cascade = CascadeType.ALL)
     private List<Registros> Registros;
 
     // Constructor, getters y setters

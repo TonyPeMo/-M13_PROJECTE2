@@ -43,6 +43,17 @@ public class Configuracion {
     @Column(name = "T_CALOR", columnDefinition = "float default 23.5")
     private float tCalor;
 
+    public Configuracion() {
+        this.colorFrio = "#1C3AFF";
+        this.colorOptimo = "#00FF00";
+        this.colorCalor = "#FF0000";
+        this.notFrio = 18.5f;
+        this.notCalor = 23.5f;
+        this.tFrio = 18.5f;
+        this.tOptimaMin = 18.5f;
+        this.tOptimaMax = 23.5f;
+        this.tCalor = 23.5f;
+    }
     // Constructor, getters y setters
 
     public int getIdConfig() {

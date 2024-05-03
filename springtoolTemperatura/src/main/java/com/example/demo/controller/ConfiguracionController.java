@@ -14,11 +14,14 @@ import java.util.List;
 @RequestMapping("/configuracion")
 public class ConfiguracionController {
 
-    @Autowired
-    private ConfiguracionRepository configuracionRepository;
+    private final ConfiguracionRepository configuracionRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+
+    public ConfiguracionController(ConfiguracionRepository configuracionRepository, UsuarioRepository usuarioRepository) {
+        this.configuracionRepository = configuracionRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
 
     // Obtener todas las configuraciones
     // no se va a usar en teoria
