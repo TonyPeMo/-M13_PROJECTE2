@@ -6,6 +6,7 @@ import com.example.demo.bean.Registros;
 import com.example.demo.repository.AulasRepository;
 import com.example.demo.repository.RegistrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -15,82 +16,61 @@ import java.util.List;
 @RequestMapping("/aulas")
 public class AulasController {
 
-    private final RegistrosRepository registrosRepository;
+        @Autowired
+        private AulasRepository aulasRepository;
 
-    private final AulasRepository aulasRepository;
+        @Autowired
+        private RegistrosRepository registrosRepository;
 
-    public AulasController(RegistrosRepository registrosRepository, AulasRepository aulasRepository) {
-        this.registrosRepository = registrosRepository;
-        this.aulasRepository = aulasRepository;
-    }
+        @GetMapping
+        public List<Aulas> getAulas() {
+            return aulasRepository.findAll();
+        }
 
-    // guarda un registro en una aula por ID
-    @PostMapping("/{id}/registros")
-    public Registros createRegistro(@PathVariable Integer id, @RequestBody Registros registro) {
-        Aulas aula = aulasRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Aula", "id", id));
-        registro.setAulas(aula);
-        return registrosRepository.save(registro);
-    }
+        @GetMapping("/{id}")
+        public Aulas getAula(@PathVariable int id) {
+            return aulasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aulas" , "id", id));
+        }
 
-    // guarda un registro en una aula por NOMBRE
-    @PostMapping("/{nombre}/registros")
-    public Registros createRegistro(@PathVariable String nombre, @RequestBody Registros registro) {
-        Aulas aula = aulasRepository.findByNomAula(nombre);
-        registro.setAulas(aula);
-        return registrosRepository.save(registro);
-    }
+        @GetMapping("/nombre/{nombre}")
+        public Aulas getAulaPorNombre(@PathVariable String nombre) {
+            return aulasRepository.findByNomAula(nombre);
+        }
 
-    //te devuelve todos los registros de una aula por ID
-    @GetMapping("/{idAula}")
-    public List<Registros> getRegistrosByAula(@PathVariable Integer idAula){
-        Aulas aula = aulasRepository.findById(idAula)
-                .orElseThrow(() -> new ResourceNotFoundException("Aula", "id", idAula));
-        return registrosRepository.findByAulas(aula);
-    }
+        @PostMapping
+        public Aulas createAula(@RequestBody Aulas aula) {
+            return aulasRepository.save(aula);
+        }
 
-    //te devuelve todos los registros de una aula POR NOMBRE
-    @GetMapping("/{nombre}")
-    public List<Registros> getRegistrosByAula(@PathVariable String nombre) {
-        Aulas aula = aulasRepository.findByNomAula(nombre);
-        return registrosRepository.findByAulas(aula);
-    }
+        @PostMapping("/list")
+        public List<Aulas> createAulas(@RequestBody List<Aulas> aulasList) {
+            return aulasRepository.saveAll(aulasList);
+        }
 
-    //te devuelve todos los registros de una aula entre dos fechas por ID
-    @GetMapping("/{idAula}/registros")
-    public List<Registros> getRegistrosByAulaAndFecha(@PathVariable Integer idAula, @RequestParam Date fechaInicio, @RequestParam Date fechaFin) {
-        Aulas aula = aulasRepository.findById(idAula)
-                .orElseThrow(() -> new ResourceNotFoundException("Aula", "id", idAula));
-        return registrosRepository.findByAulasAndFechaBetween(aula, fechaInicio, fechaFin);
-    }
+        @PutMapping("/{id}")
+        public Aulas updateAula(@PathVariable int id, @RequestBody Aulas aula) {
+            Aulas aulaToUpdate = aulasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aulas" , "id", id));
+            aulaToUpdate.setNomAula(aula.getNomAula());
+            aulaToUpdate.setNumPlanta(aula.getNumPlanta());
+            return aulasRepository.save(aulaToUpdate);
+        }
 
-    //te devuelve todos los registros de una aula entre dos fechas por NOMBRE
-    @GetMapping("/{nombre}/registros")
-    public List<Registros> getRegistrosByAulaAndFecha(@PathVariable String nombre, @RequestParam Date fechaInicio, @RequestParam Date fechaFin) {
-        Aulas aula = aulasRepository.findByNomAula(nombre);
-        return registrosRepository.findByAulasAndFechaBetween(aula, fechaInicio, fechaFin);
-    }
+        @DeleteMapping("/{id}")
+        public void deleteAula(@PathVariable int id) {
+            aulasRepository.deleteById(id);
+        }
 
+        @GetMapping("/{id}/registros")
+        public List<Registros> getRegistros(@PathVariable int id) {
+            Aulas aula = aulasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aulas" , "id", id));
+            return aula.getRegistros();
+        }
 
-    //no se va a usar en teoria
-    // actualiza un registro de una aula
-    @PutMapping("/{idAula}/registros/{idRegistro}")
-    public Registros updateRegistro(@PathVariable Integer idAula, @PathVariable Integer idRegistro, @RequestBody Registros registroDetails) {
-        Aulas aula = aulasRepository.findById(idAula)
-                .orElseThrow(() -> new ResourceNotFoundException("Aula", "id", idAula));
-        Registros registro = registrosRepository.findById(idRegistro)
-                .orElseThrow(() -> new ResourceNotFoundException("Registro", "id", idRegistro));
-        registro.setAulas(aula);
-        registro.setFecha(registroDetails.getFecha());
-        return registrosRepository.save(registro);
-    }
-
-    //no se va a usar en teoria
-    // elimina un registro de una aula
-    @DeleteMapping("/{idAula}/registros/{idRegistro}")
-    public void deleteRegistro(@PathVariable Integer idAula, @PathVariable Integer idRegistro) {
-        Registros registro = registrosRepository.findById(idRegistro)
-                .orElseThrow(() -> new ResourceNotFoundException("Registro", "id", idRegistro));
-        registrosRepository.delete(registro);
-    }
+        @PostMapping("/{id}/registros")
+        public Registros createRegistro(@PathVariable int id, @RequestBody Registros registro) {
+            Aulas aula = aulasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Aulas" , "id", id));
+            registro.setAulas(aula);
+            registro.setFecha(new Date());
+            return registrosRepository.save(registro);
+        }
 }

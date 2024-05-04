@@ -2,6 +2,7 @@ package com.example.demo.bean;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +22,7 @@ public class Aulas {
 
     // Relacion con Configuracion
     @OneToMany(mappedBy = "aulas", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Registros> Registros;
 
     // Constructor, getters y setters
@@ -33,7 +35,7 @@ public class Aulas {
     }
 
     public int getIdAula() {
-        return idAula;
+        return this.idAula;
     }
 
     public void setIdAula(int idAula) {

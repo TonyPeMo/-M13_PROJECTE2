@@ -8,6 +8,7 @@ import com.example.demo.repository.RegistrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,17 @@ public class RegistrosController {
         this.registrosRepository = registrosRepository;
         this.aulasRepository = aulasRepository;
     }
+
+    @PostMapping
+    public Registros createRegistro(@RequestBody Registros registro) {
+        return registrosRepository.save(registro);
+    }
+
+    @PostMapping("/list")
+    public List<Registros> createRegistro(@RequestBody List<Registros> registrosList) {
+        return registrosRepository.saveAll(registrosList);
+    }
+
 
     // Obtener todos los registros
     // no se va a usar en teoria
@@ -66,6 +78,11 @@ public class RegistrosController {
     public List<Registros> getRegistrosByAulaAndFecha(@PathVariable String nombreAula, @RequestParam Date fechaInicio, @RequestParam Date fechaFin) {
         Aulas aula = aulasRepository.findByNomAula(nombreAula);
         return registrosRepository.findByAulasAndFechaBetween(aula, fechaInicio, fechaFin);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteRegistro(@PathVariable int id) {
+        registrosRepository.deleteById(id);
     }
 
 }

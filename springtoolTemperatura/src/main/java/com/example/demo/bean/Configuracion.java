@@ -1,5 +1,6 @@
 package com.example.demo.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,7 @@ public class Configuracion {
     // Relación con Usuario
     @OneToOne
     @JoinColumn(name = "ID_USER")
+    @JsonIgnore
     private Usuario usuario;
 
     @Column(name = "COLOR_FRIO", length = 7, columnDefinition = "varchar(7) default '#1C3AFF'")
