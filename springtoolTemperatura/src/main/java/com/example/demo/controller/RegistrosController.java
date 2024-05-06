@@ -6,9 +6,10 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.AulasRepository;
 import com.example.demo.repository.RegistrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,9 +28,25 @@ public class RegistrosController {
     }
 
     @PostMapping
-    public Registros createRegistro(@RequestBody Registros registro) {
-        return registrosRepository.save(registro);
+    public Registros createRegistro(@RequestBody Registros registroRequest) {
+
+        // Buscar el objeto Aulas por su ID
+        Aulas aula = aulasRepository.findById(registroRequest.getAulaId())
+                .orElseThrow(() -> new ResourceNotFoundException("Aulas", "Aula", registroRequest.getAulaId()));
+
+        // Crear un nuevo registro
+        Registros nuevoRegistro = new Registros();
+        nuevoRegistro.setAulas(aula);
+        nuevoRegistro.setTemperatura(registroRequest.getTemperatura());
+        nuevoRegistro.setTermometro(registroRequest.getTermometro());
+        nuevoRegistro.setFecha(registroRequest.getFecha());
+
+        // Guardar el registro en la base de datos
+        return registrosRepository.save(nuevoRegistro);
     }
+
+
+
 
     @PostMapping("/list")
     public List<Registros> createRegistro(@RequestBody List<Registros> registrosList) {
@@ -44,20 +61,6 @@ public class RegistrosController {
         return registrosRepository.findAll();
     }
 
-    // Obtener los registros de un aula
-    @GetMapping("/aula/{idAula}")
-    public List<Registros> getRegistrosByAula(@PathVariable Integer idAula) {
-        Aulas aula = aulasRepository.findById(idAula)
-                .orElseThrow(() -> new ResourceNotFoundException("Aula", "id", idAula));
-        return registrosRepository.findByAulas(aula);
-    }
-
-    // Obtener los registros de una aula por nombre
-    @GetMapping("/aula/{nombreAula}")
-    public List<Registros> getRegistrosByAula(@PathVariable String nombreAula) {
-        Aulas aula = aulasRepository.findByNomAula(nombreAula);
-        return registrosRepository.findByAulas(aula);
-    }
 
     // Obtener todos los registros entre dos fechas
     // no se va a usar en teoria

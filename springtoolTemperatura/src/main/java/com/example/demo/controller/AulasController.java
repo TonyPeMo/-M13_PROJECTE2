@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
+
+// TODO FUNCIONA!!!!
 @RestController
 @RequestMapping("/aulas")
 public class AulasController {
@@ -73,4 +75,24 @@ public class AulasController {
             registro.setFecha(new Date());
             return registrosRepository.save(registro);
         }
+
+    @GetMapping("/nombre/{nombre}/registros")
+    public List<Registros> getRegistros(@PathVariable String nombre) {
+        Aulas aula = aulasRepository.findByNomAula(nombre);
+        if (aula == null) {
+            throw new ResourceNotFoundException("Aulas", "nombre", nombre);
+        }
+        return aula.getRegistros();
+    }
+
+    @PostMapping("/nombre/{nombre}/registros")
+    public Registros createRegistro(@PathVariable String nombre, @RequestBody Registros registro) {
+        Aulas aula = aulasRepository.findByNomAula(nombre);
+        if (aula == null) {
+            throw new ResourceNotFoundException("Aulas", "nombre", nombre);
+        }
+        registro.setAulas(aula);
+        registro.setFecha(new Date());
+        return registrosRepository.save(registro);
+    }
 }

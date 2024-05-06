@@ -8,4 +8,5 @@ import java.util.List;
 public interface AulasRepository extends JpaRepository<Aulas, Integer>{
     Aulas findByNomAula(String nombre);
     List<Aulas> findByNumPlanta(int numPlanta);
+    Aulas findByIdAula(int idAula);
 }
