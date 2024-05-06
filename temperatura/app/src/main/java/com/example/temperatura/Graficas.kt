@@ -5,13 +5,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.echo.holographlibrary.Line
 import com.echo.holographlibrary.LineGraph
+import com.echo.holographlibrary.LineGraph.OnPointClickedListener
 import com.echo.holographlibrary.LinePoint
 import com.echo.holographlibrary.PieGraph
 import com.echo.holographlibrary.PieSlice
-//import com.example.temperatura.data.RegistroLine
+import com.example.temperatura.data.RegistroLine
 import com.example.temperatura.data.Registro
 import com.example.temperatura.databinding.ActivityGraficasBinding
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -38,9 +40,9 @@ class Graficas : AppCompatActivity() {
     //Graficas View
     private  lateinit var binding : ActivityGraficasBinding
     private  lateinit var pieGrafica: PieGraph
-    //private  lateinit var lineGrafica: LineGraph
+    private  lateinit var lineGrafica: LineGraph
     private var listaRegistrosPastel: ArrayList<Registro> = ArrayList()
-    //private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
+    private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
 
 
     @SuppressLint("MissingInflatedId")
@@ -48,9 +50,31 @@ class Graficas : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_graficas)
 
-        // GRAFICAS PASTEL
+        //Graficos
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.tvPuntos.text = "Puntos\n"
+
+        var linea = Line()
+        linea = datosGrafica(linea, 1.0, 1.0)
+        linea = datosGrafica(linea, 2.0, 9.0)
+        linea = datosGrafica(linea, 3.0, 3.0)
+        linea = datosGrafica(linea, 4.0, 5.0)
+        linea.color = Color.parseColor("#0000FF")
+
+        graficarL(linea)
+
+        binding.graphLine.setOnPointClickedListener { lineIndex, pointIndex ->
+            Toast.makeText(
+                this@Graficas,
+                "Linea: $lineIndex, Punto: $pointIndex",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        /*
+        // GRAFICAS PASTEL
+
+
 
         pieGrafica = findViewById(R.id.graphPie) as PieGraph
 
@@ -66,45 +90,49 @@ class Graficas : AppCompatActivity() {
 
         binding.btnGenerar.setOnClickListener { graficarPie() }
 
+
+       */
+
+
+                // GRAFICAS LINEA
+
 /*
-        // GRAFICAS LINEA
-        binding = ActivityGraficasBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        lineGrafica = findViewById(R.id.graphLine) as LineGraph
+                lineGrafica = findViewById(R.id.graphLine) as LineGraph
 
-        binding.btnGuardar.setOnClickListener{
+                binding.btnGuardar.setOnClickListener{
 
-            listaRegistrosLine.add(RegistroLine(20.50f,1))
-            listaRegistrosLine.add(RegistroLine(22.50f,2))
-            listaRegistrosLine.add(RegistroLine(21.50f,3))
+                    listaRegistrosLine.add(RegistroLine(20.50f,1))
+                    listaRegistrosLine.add(RegistroLine(22.50f,2))
+                    listaRegistrosLine.add(RegistroLine(21.50f,3))
 
 
 
-        }
-
-        binding.btnGenerar.setOnClickListener { graficarLine() }
+                }
 
 
-        fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double): Line {
-            val punto = LinePoint()
-            punto.setX(ejeX)
-            punto.setY(ejeY)
-            linea.addPoint(punto)
+                binding.btnGenerar.setOnClickListener { graficarLine() }
 
-            binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y:$ejeY"
 
-            return linea
-        }
+                fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double): Line {
+                    val punto = LinePoint()
+                    punto.setX(ejeX)
+                    punto.setY(ejeY)
+                    linea.addPoint(punto)
 
-        fun graficar(linea: Line) {
-            binding.lineGrafica.addLine(linea)
-            binding.lineGrafica.setRangeX(1f, 4f)
-            binding.lineGrafica.setRangeY(0f, 10f)
-            binding.lineGrafica.lineToFill = 0
-        }
-*/
+                    binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y:$ejeY"
 
+                    return linea
+                }
+
+                fun graficar(linea: Line) {
+                    binding.lineGrafica.addLine(linea)
+                    binding.lineGrafica.setRangeX(1f, 4f)
+                    binding.lineGrafica.setRangeY(0f, 10f)
+                    binding.lineGrafica.lineToFill = 0
+                }
+
+        */
 
         // Inicio
         selectedDateTextView_inicio = findViewById(R.id.textViewDatePicker_inicio)
@@ -134,15 +162,36 @@ class Graficas : AppCompatActivity() {
         selectedTimeFinal = currentDate.time
     }
 
+    //GRAFICAS LINEA
+    fun datosGrafica(linea:Line, ejeX:Double, ejeY:Double) : Line{
+        val punto = LinePoint()
+        punto.setX(ejeX)
+        punto.setY(ejeY)
+        linea.addPoint(punto)
 
-    fun graficarPie (){
+        binding.tvPuntos.text = "${binding.tvPuntos.text}\n:X $ejeX, Y: $ejeY"
+
+        return(linea)
+    }
+
+    fun graficarL(linea: Line) {
+        binding.graphLine.addLine(linea)
+        binding.graphLine.setRangeX(1f, 4f)
+        binding.graphLine.setRangeY(0f,10f)
+        binding.graphLine.lineToFill = 0
+    }
+
+
+    // GRAFICA PASTEL
+
+    /*fun graficarPie (){
         for (i in 0 until listaRegistrosPastel.size) {
             val rebanada = PieSlice()
             rebanada.color = Color.parseColor(listaRegistrosPastel[i].color)
             rebanada.value = listaRegistrosPastel[i].temperatura.toString().toFloat()
             pieGrafica.addSlice(rebanada)
         }
-    }
+    }*/
     fun showDatePicker(view: View) {
         val datePicker =
             MaterialDatePicker.Builder.datePicker()
@@ -193,6 +242,20 @@ class Graficas : AppCompatActivity() {
 
         timePicker.show(supportFragmentManager, "timePicker")
     }
+
+
+   /*
+    fun cambiarGrafico(view: View) {
+        if (pieGrafica.visibility == View.VISIBLE) {
+            pieGrafica.visibility = View.GONE
+            lineGrafica.visibility = View.VISIBLE
+            // Llama a la función para generar el gráfico de líneas aquí si es necesario
+        } else {
+            pieGrafica.visibility = View.VISIBLE
+            lineGrafica.visibility = View.GONE
+        }
+    }
+*/
 
     fun toAtras(view: View) {
         onBackPressed()
