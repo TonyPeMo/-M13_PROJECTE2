@@ -208,7 +208,30 @@
                         android:textStyle="italic" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnGuardar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guardar"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnGenerar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Generar"/>
+
+                </LinearLayout>
+
+
             </LinearLayout>
+
 
             <!-- Segunda columna -->
             <LinearLayout
@@ -222,16 +245,30 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_margin="16dp">
 
-                    <ImageView
-                        android:id="@+id/imageView4"
+                    <TextView
+                        android:id="@+id/tvPuntos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+
+
+                    <!-- grafico pastel
+                    <com.echo.holographlibrary.PieGraph
+                        android:id="@+id/graphPie"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="8dp"
-                        android:src="@drawable/image2"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayout3" />
+                        android:layout_margin="24dp" />  -->
+
+
+                    <!-- grafico linea    /> -->
+                    <com.echo.holographlibrary.LineGraph
+                        android:id="@+id/graphLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="24dp"/>
+
 
                     <ImageView
                         android:id="@+id/imageView3"
@@ -240,6 +277,7 @@
                         android:layout_gravity="bottom"
                         app:srcCompat="@drawable/play_circle_24px" />
                 </LinearLayout>
+
 
             </LinearLayout>
 

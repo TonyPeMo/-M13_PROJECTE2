@@ -10,8 +10,7 @@ data class Registro(
     val color :String
 )
 */
-data class Registro(
-    val registro: String,
+data class RegistroLine(
     val temperatura: Float,
-    val color:String
+    val fecha:Int
 )
