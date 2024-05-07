@@ -56,10 +56,10 @@ class Graficas : AppCompatActivity() {
         binding.tvPuntos.text = "Puntos\n"
 
         var linea = Line()
-        linea = datosGrafica(linea, 1.0, 1.0)
-        linea = datosGrafica(linea, 2.0, 9.0)
-        linea = datosGrafica(linea, 3.0, 3.0)
-        linea = datosGrafica(linea, 4.0, 5.0)
+        linea = datosGrafica(linea, 15.0, 18.5)
+        linea = datosGrafica(linea, 16.0, 20.0)
+        linea = datosGrafica(linea, 17.0, 19.5)
+        linea = datosGrafica(linea, 18.0, 20.7)
         linea.color = Color.parseColor("#0000FF")
 
         graficarL(linea)
@@ -169,15 +169,15 @@ class Graficas : AppCompatActivity() {
         punto.setY(ejeY)
         linea.addPoint(punto)
 
-        binding.tvPuntos.text = "${binding.tvPuntos.text}\n:X $ejeX, Y: $ejeY"
+        binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y: $ejeY"
 
         return(linea)
     }
 
     fun graficarL(linea: Line) {
         binding.graphLine.addLine(linea)
-        binding.graphLine.setRangeX(1f, 4f)
-        binding.graphLine.setRangeY(0f,10f)
+        binding.graphLine.setRangeX(15f, 18f)
+        binding.graphLine.setRangeY(15f,26f)
         binding.graphLine.lineToFill = 0
     }
 
