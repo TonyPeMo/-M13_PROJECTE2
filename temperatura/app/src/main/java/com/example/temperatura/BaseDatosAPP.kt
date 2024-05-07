@@ -1,5 +1,5 @@
 package com.example.temperatura
-
+/*
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
@@ -336,7 +336,7 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
     private val GET_REGISTROS_BY_AULA_ID = "SELECT * FROM REGISTROS WHERE ID_AULA = ?"
 
-    @SuppressLint("Range")
+   /* @SuppressLint("Range")
     fun getRegistrosPorAulaId(idAula: Int): List<Registro> {
         val registros = mutableListOf<Registro>()
         val db = this.readableDatabase
@@ -358,7 +358,7 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db.close()
         return registros
     }
-
+*/
 
     private val GET_REGISTROS_BY_FECHA = "SELECT * FROM REGISTROS WHERE FECHA BETWEEN ? AND ?"
 
@@ -482,3 +482,4 @@ class BaseDatosAPP(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     }
 
 }
+*/

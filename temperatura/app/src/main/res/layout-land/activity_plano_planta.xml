@@ -58,6 +58,12 @@
     </LinearLayout>
 
     <!-- Plano de la planta -->
+
+
+    <!-- Otra vista -->
+
+
+    <!-- AULA03-->
     <ImageView
         android:id="@+id/mapaTemp"
         android:layout_width="600dp"
@@ -67,14 +73,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/linearEncabezado"
-        app:layout_constraintTop_toBottomOf="@+id/linearEncabezado" />
+        app:layout_constraintTop_toBottomOf="@+id/linearEncabezado"
+        app:layout_constraintVertical_bias="0.615" />
 
-
-
-    <!-- Otra vista -->
-
-
-    <!-- AULA03-->
     <ImageView
         android:id="@+id/aula03"
         android:layout_width="140dp"
@@ -91,9 +92,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:background="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@id/aula03"
         app:layout_constraintEnd_toEndOf="@id/aula03"
         app:layout_constraintStart_toStartOf="@id/aula03"
@@ -117,9 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:background="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@id/aula04"
         app:layout_constraintEnd_toEndOf="@id/aula04"
         app:layout_constraintStart_toStartOf="@id/aula04"
@@ -145,9 +144,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:background="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@id/aulaAteca"
         app:layout_constraintEnd_toEndOf="@id/aulaAteca"
         app:layout_constraintStart_toStartOf="@id/aulaAteca"
@@ -172,9 +170,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
-        android:background="#FFFFFF"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@id/aula2"
         app:layout_constraintEnd_toEndOf="@id/aula2"
         app:layout_constraintStart_toStartOf="@id/aula2"
