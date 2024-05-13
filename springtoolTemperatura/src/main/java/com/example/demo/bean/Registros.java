@@ -72,6 +72,17 @@ public class Registros {
         return fecha;
     }
 
+    @Override
+    public String toString() {
+        return "Registros{" +
+                "idRegistro=" + idRegistro +
+                ", aulas=" + aulas +
+                ", temperatura=" + temperatura +
+                ", termometro=" + termometro +
+                ", fecha=" + fecha +
+                '}';
+    }
+
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
