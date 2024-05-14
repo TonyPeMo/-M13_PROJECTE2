@@ -60,7 +60,7 @@ class Graficas : AppCompatActivity() {
         linea = datosGrafica(linea, 16.0, 20.0)
         linea = datosGrafica(linea, 17.0, 19.5)
         linea = datosGrafica(linea, 18.0, 20.7)
-        linea.color = Color.parseColor("#0000FF")
+        linea.color = Color.parseColor("#FFBB33");
 
         graficarL(linea)
 
@@ -71,95 +71,76 @@ class Graficas : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+
         /*
         // GRAFICAS PASTEL
+            pieGrafica = findViewById(R.id.graphPie) as PieGraph
+            binding.btnGuardar.setOnClickListener{
+                listaRegistrosPastel.add(Registro("reg1", 18.50f, "#006400"))
+                listaRegistrosPastel.add(Registro("reg2", 24.50f, "#228B22"))
+                listaRegistrosPastel.add(Registro("reg3", 16.50f, "#808000"))
+                listaRegistrosPastel.add(Registro("reg4", 20.50f, "#00FF00"))
+                listaRegistrosPastel.add(Registro("reg5", 21.10f, "#7FFF00"))
+                listaRegistrosPastel.add(Registro("reg6", 18.70f, "#00FF7F"))
+            }
+
+            binding.btnGenerar.setOnClickListener { graficarPie() }
+           */
 
 
+        // GRAFICAS LINEA
+            /*lineGrafica = findViewById(R.id.graphLine) as LineGraph
 
-        pieGrafica = findViewById(R.id.graphPie) as PieGraph
+            binding.btnGuardar.setOnClickListener{
 
-        binding.btnGuardar.setOnClickListener{
+                listaRegistrosLine.add(RegistroLine(20.50f,1))
+                listaRegistrosLine.add(RegistroLine(22.50f,2))
+                listaRegistrosLine.add(RegistroLine(21.50f,3))
+            }
+            binding.btnGenerar.setOnClickListener { graficarLine() }
+            fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double): Line {
+                val punto = LinePoint()
+                punto.setX(ejeX)
+                punto.setY(ejeY)
+                linea.addPoint(punto)
+                binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y:$ejeY"
+                return linea
+            }
 
-            listaRegistrosPastel.add(Registro("reg1", 18.50f, "#006400"))
-            listaRegistrosPastel.add(Registro("reg2", 24.50f, "#228B22"))
-            listaRegistrosPastel.add(Registro("reg3", 16.50f, "#808000"))
-            listaRegistrosPastel.add(Registro("reg4", 20.50f, "#00FF00"))
-            listaRegistrosPastel.add(Registro("reg5", 21.10f, "#7FFF00"))
-            listaRegistrosPastel.add(Registro("reg6", 18.70f, "#00FF7F"))
-        }
+            fun graficar(linea: Line) {
+                binding.lineGrafica.addLine(linea)
+                binding.lineGrafica.setRangeX(1f, 4f)
+                binding.lineGrafica.setRangeY(0f, 10f)
+                binding.lineGrafica.lineToFill = 0
+            }
+            */
 
-        binding.btnGenerar.setOnClickListener { graficarPie() }
+        // FECHA Inicio
+            selectedDateTextView_inicio = findViewById(R.id.textViewDatePicker_inicio)
+            selectedTimeTextView_inicio = findViewById(R.id.textViewTimePicker_inicio)
 
+            // FECHA Final
+            selectedDateTextView_final = findViewById(R.id.textViewDatePicker_final)
+            selectedTimeTextView_final = findViewById(R.id.textViewTimePicker_final)
 
-       */
+            // Establecer la fecha y hora por defecto para el inicio y el final
+            val currentDate = Calendar.getInstance()
+            val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
+            // Solo establecer la fecha y la hora por defecto en la fecha de inicio
+            selectedDateTextView_inicio.text = "Select date"
+            selectedTimeTextView_inicio.text = "08:00"
 
-                // GRAFICAS LINEA
+            // Establecer la fecha y la hora por defecto en la fecha final
+            selectedDateTextView_final.text = dateFormat.format(currentDate.time)
+            selectedTimeTextView_final.text = timeFormat.format(currentDate.time)
 
-/*
+            selectedDateInicio = Date()
+            selectedTimeInicio = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 8); set(Calendar.MINUTE, 0) }.time
 
-                lineGrafica = findViewById(R.id.graphLine) as LineGraph
-
-                binding.btnGuardar.setOnClickListener{
-
-                    listaRegistrosLine.add(RegistroLine(20.50f,1))
-                    listaRegistrosLine.add(RegistroLine(22.50f,2))
-                    listaRegistrosLine.add(RegistroLine(21.50f,3))
-
-
-
-                }
-
-
-                binding.btnGenerar.setOnClickListener { graficarLine() }
-
-
-                fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double): Line {
-                    val punto = LinePoint()
-                    punto.setX(ejeX)
-                    punto.setY(ejeY)
-                    linea.addPoint(punto)
-
-                    binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y:$ejeY"
-
-                    return linea
-                }
-
-                fun graficar(linea: Line) {
-                    binding.lineGrafica.addLine(linea)
-                    binding.lineGrafica.setRangeX(1f, 4f)
-                    binding.lineGrafica.setRangeY(0f, 10f)
-                    binding.lineGrafica.lineToFill = 0
-                }
-
-        */
-
-        // Inicio
-        selectedDateTextView_inicio = findViewById(R.id.textViewDatePicker_inicio)
-        selectedTimeTextView_inicio = findViewById(R.id.textViewTimePicker_inicio)
-
-        // Final
-        selectedDateTextView_final = findViewById(R.id.textViewDatePicker_final)
-        selectedTimeTextView_final = findViewById(R.id.textViewTimePicker_final)
-
-        // Establecer la fecha y hora por defecto para el inicio y el final
-        val currentDate = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-
-        // Solo establecer la fecha y la hora por defecto en la fecha de inicio
-        selectedDateTextView_inicio.text = "Select date"
-        selectedTimeTextView_inicio.text = "08:00"
-
-        // Establecer la fecha y la hora por defecto en la fecha final
-        selectedDateTextView_final.text = dateFormat.format(currentDate.time)
-        selectedTimeTextView_final.text = timeFormat.format(currentDate.time)
-
-        selectedDateInicio = Date()
-        selectedTimeInicio = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 8); set(Calendar.MINUTE, 0) }.time
-
-        selectedDateFinal = currentDate.time
-        selectedTimeFinal = currentDate.time
+            selectedDateFinal = currentDate.time
+            selectedTimeFinal = currentDate.time
     }
 
     //GRAFICAS LINEA
@@ -169,7 +150,7 @@ class Graficas : AppCompatActivity() {
         punto.setY(ejeY)
         linea.addPoint(punto)
 
-        binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y: $ejeY"
+        binding.tvPuntos.text = "${binding.tvPuntos.text}\n15/05/2024 - Temperatura: $ejeY º"
 
         return(linea)
     }
@@ -178,9 +159,7 @@ class Graficas : AppCompatActivity() {
         binding.graphLine.addLine(linea)
         binding.graphLine.setRangeX(15f, 18f)
         binding.graphLine.setRangeY(15f,26f)
-        binding.graphLine.lineToFill = 0
     }
-
 
     // GRAFICA PASTEL
 
