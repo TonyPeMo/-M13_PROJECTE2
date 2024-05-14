@@ -10,5 +10,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     void deleteUsuarioByIdUser(Integer id);
     @Transactional
     void deleteById(Integer id);
+    Usuario findUsuarioByUsername(String username);
 
 }

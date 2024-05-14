@@ -145,4 +145,7 @@ public class Configuracion {
     public void settCalor(float tCalor) {
         this.tCalor = tCalor;
     }
+    public int getUsuarioId() {
+        return this.usuario.getIdUser();
+    }
 }
