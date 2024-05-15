@@ -62,7 +62,5 @@ dependencies {
 
     // GRAFICAS
     implementation ("org.quanqi:android-holo-graph:0.1.0")
-    implementation("mysql:mysql-connector-java:8.0.28")
-
 
 }
