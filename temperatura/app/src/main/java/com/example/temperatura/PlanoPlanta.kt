@@ -93,7 +93,6 @@ class PlanoPlanta : AppCompatActivity() {
             val temperatureTextView = findViewById<TextView>(resources.getIdentifier("temperatura$aula", "id", packageName))
             temperatureTextView.text = "${temperatura.toString()} ºC"
 
-
             // Actualizar el color de fondo basado en la temperatura
             val imageViewHabitacion = findViewById<ImageView>(resources.getIdentifier(aula, "id", packageName))
             imageViewHabitacion.setBackgroundColor(getColorFromTemperature(temperatura))
@@ -119,5 +118,4 @@ class PlanoPlanta : AppCompatActivity() {
             else -> Color.parseColor("#75ff0000") // Rojo
         }
     }
-
 }
