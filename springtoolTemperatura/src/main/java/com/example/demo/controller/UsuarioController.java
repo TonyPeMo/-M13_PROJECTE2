@@ -5,6 +5,7 @@ import com.example.demo.bean.Usuario;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.ConfiguracionRepository;
 import com.example.demo.repository.UsuarioRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ import java.util.List;
 public class UsuarioController {
 
     private final UsuarioRepository usuarioService;
-
     private final ConfiguracionRepository configuracionRepository;
 
+    @Autowired
     public UsuarioController(ConfiguracionRepository configuracionRepository, UsuarioRepository usuarioService) {
         this.configuracionRepository = configuracionRepository;
         this.usuarioService = usuarioService;
@@ -31,6 +32,9 @@ public class UsuarioController {
 
     @PostMapping
     public Usuario createUsuario(@RequestBody Usuario usuario) {
+        // Encripta la contraseña del usuario
+        String hashedPassword = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
+        usuario.setPassword(hashedPassword);
         // Guarda el usuario en la base de datos
         Usuario savedUsuario = usuarioService.save(usuario);
 
@@ -50,24 +54,28 @@ public class UsuarioController {
 
         // Aquí puedes actualizar los campos del usuario
         usuario.setUsername(usuarioDetails.getUsername());
-        usuario.setPassword(usuarioDetails.getPassword());
-        // Asegúrate de actualizar todos los campos que quieras cambiar
+
+        // Encripta la nueva contraseña si está presente
+        if (usuarioDetails.getPassword() != null && !usuarioDetails.getPassword().isEmpty()) {
+            String hashedPassword = BCrypt.hashpw(usuarioDetails.getPassword(), BCrypt.gensalt());
+            usuario.setPassword(hashedPassword);
+        }
 
         return usuarioService.save(usuario);
     }
+
     @GetMapping("/nombre/{nombre}")
     public Usuario getUsuarioByNombre(@PathVariable String nombre) {
         return usuarioService.findUsuarioByUsername(nombre);
     }
-    @GetMapping("/password/{nombre}")
-    public String getUsuarioPassword(@PathVariable String nombre) {
+
+    @GetMapping("/verifyPassword")
+    public boolean verifyUsuarioPassword(@RequestParam String nombre, @RequestParam String password) {
         Usuario usuario = usuarioService.findUsuarioByUsername(nombre);
         if (usuario != null) {
-            return usuario.getPassword();
+            return BCrypt.checkpw(password, usuario.getPassword());
         } else {
-            //return "";
             throw new ResourceNotFoundException("Usuario", "nombre", nombre);
-
         }
     }
 
@@ -76,6 +84,7 @@ public class UsuarioController {
         return usuarioService.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario", "id", id));
     }
+
     @Transactional
     @DeleteMapping("/{id}")
     public void deleteUsuario(@PathVariable Integer id) {
