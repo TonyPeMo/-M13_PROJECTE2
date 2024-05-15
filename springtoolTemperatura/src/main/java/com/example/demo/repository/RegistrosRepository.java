@@ -15,7 +15,6 @@ public interface RegistrosRepository extends JpaRepository<Registros, Integer> {
     List<Registros> findByFechaBetween(Date fecha, Date fecha2);
     List<Registros> findByAulasOrderByFechaDesc(Aulas aula);
 
-    @Query(value = "SELECT AVG(temperatura) AS temperatura_media FROM Registros WHERE id_aula = :idAula AND fecha BETWEEN (SELECT MAX(fecha) FROM Registros WHERE id_aula = :idAula) - INTERVAL 5 MINUTE AND (SELECT MAX(fecha) FROM Registros WHERE id_aula = :idAula)", nativeQuery = true)
+    @Query(value = "SELECT ROUND(AVG(temperatura), 2) AS temperatura_media FROM Registros WHERE id_aula = :idAula AND fecha BETWEEN (SELECT MAX(fecha) FROM Registros WHERE id_aula = :idAula) - INTERVAL 5 MINUTE AND (SELECT MAX(fecha) FROM Registros WHERE id_aula = :idAula)", nativeQuery = true)
     Double getMediaTemperaturaUltimosCincoMinutos(@Param("idAula") Integer idAula);
-
 }
