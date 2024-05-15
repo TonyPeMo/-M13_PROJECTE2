@@ -125,6 +125,14 @@ public class AulasController {
         return registrosRepository.getMediaTemperaturaUltimosCincoMinutos(idAula);
     }
 
+    @GetMapping("/nombre/{nombreAula}/ultimafecha")
+    public Double getMediaTemperaturaUltimosCincoMinutosNombre(@PathVariable String nombreAula) {
+        Aulas aula = aulasRepository.findByNomAula(nombreAula);
+        int idAula = aula.getIdAula();
+
+        return registrosRepository.getMediaTemperaturaUltimosCincoMinutos(idAula);
+    }
+
 
 
 }
