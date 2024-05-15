@@ -33,15 +33,15 @@ class Graficas : AppCompatActivity() {
 
     private lateinit var selectedDateInicio: Date
     private lateinit var selectedTimeInicio: Date
-
     private lateinit var selectedDateFinal: Date
     private lateinit var selectedTimeFinal: Date
 
     //Graficas View
+    private var cantidadPuntos : Int = 6
     private  lateinit var binding : ActivityGraficasBinding
-    private  lateinit var pieGrafica: PieGraph
+    //private  lateinit var pieGrafica: PieGraph
     private  lateinit var lineGrafica: LineGraph
-    private var listaRegistrosPastel: ArrayList<Registro> = ArrayList()
+    //private var listaRegistrosPastel: ArrayList<Registro> = ArrayList()
     private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
 
 
@@ -53,14 +53,23 @@ class Graficas : AppCompatActivity() {
         //Graficos
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.tvPuntos.text = "Puntos\n"
+        binding.tvPuntos.text = "Días\n"
 
-        var linea = Line()
+        /*
         linea = datosGrafica(linea, 15.0, 18.5)
         linea = datosGrafica(linea, 16.0, 20.0)
         linea = datosGrafica(linea, 17.0, 19.5)
         linea = datosGrafica(linea, 18.0, 20.7)
         linea.color = Color.parseColor("#FFBB33");
+*/
+        // Genera puntos para la línea
+        var linea = Line()
+        for (i in 1..cantidadPuntos) {
+            var ejeX = 15.0 + i
+            var ejeY = 18.2
+            linea = datosGrafica(linea, ejeX, ejeY)
+        }
+        linea.color = Color.parseColor("#FFBB33")
 
         graficarL(linea)
 
@@ -143,8 +152,8 @@ class Graficas : AppCompatActivity() {
             selectedTimeFinal = currentDate.time
     }
 
-    //GRAFICAS LINEA
-    fun datosGrafica(linea:Line, ejeX:Double, ejeY:Double) : Line{
+    // Función para agregar puntos a la línea
+    private fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double) : Line {
         val punto = LinePoint()
         punto.setX(ejeX)
         punto.setY(ejeY)
@@ -157,7 +166,7 @@ class Graficas : AppCompatActivity() {
 
     fun graficarL(linea: Line) {
         binding.graphLine.addLine(linea)
-        binding.graphLine.setRangeX(15f, 18f)
+        binding.graphLine.setRangeX(15f, 26f)
         binding.graphLine.setRangeY(15f,26f)
     }
 
@@ -193,7 +202,6 @@ class Graficas : AppCompatActivity() {
             }
             // Do something with the selected date
         }
-
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
