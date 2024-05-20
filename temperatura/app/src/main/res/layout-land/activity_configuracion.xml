@@ -129,6 +129,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TmaxFrioMapa"
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
@@ -175,12 +176,12 @@
                     android:layout_weight="1"
                     android:text="@string/optima"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/TmaxNotificacionesOptimo_mapa_de_calor"
+                    app:layout_constraintEnd_toStartOf="@+id/TminNotificacionesOptimo_mapa_de_calor"
                     app:layout_constraintStart_toEndOf="@+id/lapiz_color_optimo"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TmaxNotificacionesOptimo_mapa_de_calor"
+                    android:id="@+id/TminNotificacionesOptimo_mapa_de_calor"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -191,22 +192,23 @@
                     android:textColorHint="@color/colorTextoCuadriculaConfig"
                     app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/TminNotificacionesOptimo_mapa_de_calor"
+                    app:layout_constraintEnd_toStartOf="@+id/TmaxNotificacionesOptimo_mapa_de_calor"
                     app:layout_constraintStart_toEndOf="@+id/TituloOptimo_mapa_de_calor"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TminOptimoMapa"
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
                         android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
                         android:gravity="center"
-                        android:hint="@string/T_Max" />
+                        android:hint="@string/T_Min" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TminNotificacionesOptimo_mapa_de_calor"
+                    android:id="@+id/TmaxNotificacionesOptimo_mapa_de_calor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
@@ -217,17 +219,18 @@
                     app:boxStrokeColor="@color/ColorCuadriculaMargen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/TmaxNotificacionesOptimo_mapa_de_calor"
+                    app:layout_constraintStart_toEndOf="@+id/TminNotificacionesOptimo_mapa_de_calor"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TmaxOptimoMapa"
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
                         android:backgroundTint="@color/colorFondoCuadriculaConfig"
                         android:backgroundTintMode="add"
                         android:gravity="center"
-                        android:hint="@string/T_Min" />
+                        android:hint="@string/T_Max" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -302,6 +305,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TminCaloroMapa"
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
@@ -411,6 +415,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TmaxFrioNotificaciones"
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"
@@ -487,6 +492,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/TminCalorNotificaciones"
                         style="@style/Texto"
                         android:layout_width="70dp"
                         android:layout_height="45dp"

@@ -9,13 +9,17 @@ import android.widget.TextView
 
 class PlanoPlanta : AppCompatActivity() {
 
+    private var username: String? = null
+    private var ruta: String? = null
+
     // HashMap para almacenar las temperaturas por habitación
     private val tempAulas: HashMap<String, Double> = HashMap()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plano_planta)
-
+        username = intent.getStringExtra("username")
+        ruta = intent.getStringExtra("ruta")
         // Agrega las temperaturas para cada aula
         tempAulas["aula03"] = 23.2
         tempAulas["aula04"] = 25.1
@@ -36,10 +40,14 @@ class PlanoPlanta : AppCompatActivity() {
 
     fun toAtras(view: View) {
         onBackPressed()
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
     }
 
     fun toGrafico(view: View) {
         val intent = Intent(this, Graficas::class.java).apply{}
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
         startActivity(intent);
     }
 

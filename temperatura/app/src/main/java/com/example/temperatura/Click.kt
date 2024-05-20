@@ -26,10 +26,10 @@ class Click : AppCompatActivity(){
         startActivity(intent);
     }
 
-    fun toConfiguracion(view: View) {
-        val intent = Intent(this, Configuracion::class.java).apply {}
-        startActivity(intent);
-    }
+//    fun toConfiguracion(view: View) {
+//        val intent = Intent(this, Configuracion::class.java).apply {}
+//        startActivity(intent);
+//    }
 
     //fun toNotificacion(view: View) {
     //    val intent = Intent(this, Notificacion::class.java).apply {}

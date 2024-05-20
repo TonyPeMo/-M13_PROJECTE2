@@ -44,12 +44,15 @@ class Graficas : AppCompatActivity() {
     private var listaRegistrosPastel: ArrayList<Registro> = ArrayList()
     private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
 
+    private var username: String? = null
+    private var ruta: String? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_graficas)
-
+        username = intent.getStringExtra("username")
+        ruta = intent.getStringExtra("ruta")
         //Graficos
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -238,5 +241,7 @@ class Graficas : AppCompatActivity() {
 
     fun toAtras(view: View) {
         onBackPressed()
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
     }
 }
