@@ -35,10 +35,11 @@
             android:text="" />
 
         <ImageView
+            android:id="@+id/Notificaciones"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="24dp"
 
+            android:layout_marginEnd="24dp"
             android:src="@drawable/icon_notificaciones" />
 
     </LinearLayout>

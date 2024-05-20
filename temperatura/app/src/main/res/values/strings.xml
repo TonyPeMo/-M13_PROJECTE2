@@ -40,5 +40,8 @@
         <item>A04</item>
     </string-array>
 
+        <!-- Otras cadenas -->
+    <string name="channel_name">Nombre de tu canal de notificación</string>
+    <string name="channel_description">Descripción de tu canal de notificación</string>
 
 </resources>
