@@ -1,5 +1,7 @@
 package com.example.temperatura.data
 
+import java.util.Date
+
 /*
 data class Registro(
     val id: Int,
@@ -11,7 +13,9 @@ data class Registro(
 )
 */
 data class Registro(
-    val registro: String,
+    val registro: Int,
     val temperatura: Float,
-    val color:String
+    val color: Int,
+    val fecha: Date?,
+    val aulaId: Int
 )

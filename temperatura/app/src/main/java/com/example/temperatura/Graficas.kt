@@ -9,19 +9,23 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.echo.holographlibrary.Line
 import com.echo.holographlibrary.LineGraph
-import com.echo.holographlibrary.LineGraph.OnPointClickedListener
 import com.echo.holographlibrary.LinePoint
-import com.echo.holographlibrary.PieGraph
-import com.echo.holographlibrary.PieSlice
 import com.example.temperatura.data.RegistroLine
 import com.example.temperatura.data.Registro
 import com.example.temperatura.databinding.ActivityGraficasBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
-import java.lang.Math.round
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import kotlin.random.Random
 import kotlin.collections.ArrayList
@@ -39,12 +43,17 @@ class Graficas : AppCompatActivity() {
     private lateinit var selectedTimeFinal: Date
 
     //Graficas View
-    private var cantidadPuntos : Int = 8
+    private var cantidadPuntos : Int = 10
     private  lateinit var binding : ActivityGraficasBinding
     //private  lateinit var pieGrafica: PieGraph
     private  lateinit var lineGrafica: LineGraph
     //private var listaRegistrosPastel: ArrayList<Registro> = ArrayList()
     private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
+
+    private var notFrio = 15.0
+    private var notCalor = 23.5
+
+
 
 
     @SuppressLint("MissingInflatedId")
@@ -55,6 +64,7 @@ class Graficas : AppCompatActivity() {
         //Graficos
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        obtenerConfiguracionColores()
         binding.tvPuntos.text = "Días\n"
 
         /*
@@ -76,12 +86,23 @@ class Graficas : AppCompatActivity() {
         graficarL(linea)
 
 
+        // Genera puntos para la línea API
+        var lineaAPI = Line()
+        for (i in 1..cantidadPuntos) {
+            var ejeX = 15.0 + i
+            val ejeY = String.format("%.1f", Random.nextDouble(17.2, 22.8)).toDouble()
+            lineaAPI = datosGrafica(lineaAPI, ejeX, ejeY, true)
+        }
+        lineaAPI.color = Color.parseColor("#FF0000")
+
+        graficarL(lineaAPI)
+
         // Segunda linea
 
         var segundaLinea = Line()
         for (i in 1..cantidadPuntos) {
             var ejeX = 15.0 + i
-            val ejeY = 18.0
+            val ejeY = notFrio
             segundaLinea = datosGrafica(segundaLinea, ejeX, ejeY, false)
         }
         segundaLinea.color = Color.parseColor("#1C3AFF") // Cambia el color si es necesario
@@ -92,7 +113,7 @@ class Graficas : AppCompatActivity() {
         var terceraLinea = Line()
         for (i in 1..cantidadPuntos) {
             var ejeX = 15.0 + i
-            val ejeY = 23.0
+            val ejeY = notCalor
             terceraLinea = datosGrafica(terceraLinea, ejeX, ejeY, false)
         }
         terceraLinea.color = Color.parseColor("#ff0000") // Cambia el color si es necesario
@@ -123,32 +144,6 @@ class Graficas : AppCompatActivity() {
            */
 
 
-        // GRAFICAS LINEA
-            /*lineGrafica = findViewById(R.id.graphLine) as LineGraph
-
-            binding.btnGuardar.setOnClickListener{
-
-                listaRegistrosLine.add(RegistroLine(20.50f,1))
-                listaRegistrosLine.add(RegistroLine(22.50f,2))
-                listaRegistrosLine.add(RegistroLine(21.50f,3))
-            }
-            binding.btnGenerar.setOnClickListener { graficarLine() }
-            fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double): Line {
-                val punto = LinePoint()
-                punto.setX(ejeX)
-                punto.setY(ejeY)
-                linea.addPoint(punto)
-                binding.tvPuntos.text = "${binding.tvPuntos.text}\nX: $ejeX, Y:$ejeY"
-                return linea
-            }
-
-            fun graficar(linea: Line) {
-                binding.lineGrafica.addLine(linea)
-                binding.lineGrafica.setRangeX(1f, 4f)
-                binding.lineGrafica.setRangeY(0f, 10f)
-                binding.lineGrafica.lineToFill = 0
-            }
-            */
 
         // FECHA Inicio
             selectedDateTextView_inicio = findViewById(R.id.textViewDatePicker_inicio)
@@ -178,6 +173,34 @@ class Graficas : AppCompatActivity() {
             selectedTimeFinal = currentDate.time
     }
 
+    private fun obtenerConfiguracionColores() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val url = URL("http://192.168.18.11:8081/configuracion/nombre/admin")
+                val urlConnection = url.openConnection() as HttpURLConnection
+                urlConnection.requestMethod = "GET"
+
+                val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+                val response = StringBuilder()
+                var line: String?
+                while (bufferedReader.readLine().also { line = it } != null) {
+                    response.append(line)
+                }
+
+                // Procesar el JSON de respuesta
+                val jsonObject = JSONObject(response.toString())
+                notFrio = jsonObject.getDouble("notFrio")
+                notCalor = jsonObject.getDouble("notCalor")
+
+                // Cerrar la conexión
+                urlConnection.disconnect()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+
     // Función para agregar puntos a la línea
     private fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double, texto: Boolean) : Line {
         val punto = LinePoint()
@@ -193,8 +216,8 @@ class Graficas : AppCompatActivity() {
 
     fun graficarL(linea: Line) {
         binding.graphLine.addLine(linea)
-        binding.graphLine.setRangeX(15f, 23f)
-        binding.graphLine.setRangeY(15f,26f)
+        binding.graphLine.setRangeX(15f, 25f)
+        binding.graphLine.setRangeY(14.5f,26f)
     }
 
     // GRAFICA PASTEL
@@ -257,19 +280,53 @@ class Graficas : AppCompatActivity() {
         timePicker.show(supportFragmentManager, "timePicker")
     }
 
+    fun consultarRegistros(fechaInicio: Date, fechaFin: Date, callback: (List<Registro>) -> Unit) {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+                val formattedFechaInicio = dateFormat.format(fechaInicio)
+                val formattedFechaFin = dateFormat.format(fechaFin)
 
-   /*
-    fun cambiarGrafico(view: View) {
-        if (pieGrafica.visibility == View.VISIBLE) {
-            pieGrafica.visibility = View.GONE
-            lineGrafica.visibility = View.VISIBLE
-            // Llama a la función para generar el gráfico de líneas aquí si es necesario
-        } else {
-            pieGrafica.visibility = View.VISIBLE
-            lineGrafica.visibility = View.GONE
+                val url = URL("http://192.168.18.11:8081/aulas/nombre/A01/registros/fecha?fechaInicio=$formattedFechaInicio&fechaFin=$formattedFechaFin")
+                val urlConnection = url.openConnection() as HttpURLConnection
+                urlConnection.requestMethod = "GET"
+
+                val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+                val response = StringBuilder()
+                var line: String?
+                while (bufferedReader.readLine().also { line = it } != null) {
+                    response.append(line)
+                }
+
+                // Procesar el JSON de respuesta
+                val jsonArray = JSONArray(response.toString())
+                val registros = mutableListOf<Registro>()
+                for (i in 0 until jsonArray.length()) {
+                    val jsonObject = jsonArray.getJSONObject(i)
+                    val idRegistro = jsonObject.getInt("idRegistro")
+                    val temperatura = jsonObject.getDouble("temperatura")
+                    val termometro = jsonObject.getInt("termometro")
+                    val fechaStr = jsonObject.getString("fecha")
+                    val fecha = dateFormat.parse(fechaStr)
+                    val aulaId = jsonObject.getInt("aulaId")
+                    registros.add(Registro(idRegistro,
+                        temperatura.toFloat(), termometro, fecha, aulaId))
+                }
+
+                // Llamar al callback con los registros obtenidos
+                callback(registros)
+
+                // Cerrar la conexión
+                urlConnection.disconnect()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Manejar errores aquí, por ejemplo, notificar al usuario
+            }
         }
     }
-*/
+
+
+    //http://192.168.18.11:8081/aulas/nombre/A01/registros/fecha?fechaInicio=2024-04-07%2010:33:00&fechaFin=2024-04-08%2010:33:00
 
     fun toAtras(view: View) {
         onBackPressed()

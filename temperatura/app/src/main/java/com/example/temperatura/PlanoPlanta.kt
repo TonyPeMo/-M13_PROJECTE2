@@ -3,6 +3,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -49,7 +50,7 @@ class PlanoPlanta : AppCompatActivity() {
     private fun consultarTemperaturasPorAula() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val urlBase = "http://192.168.17.99:8081/aulas/nombre/"
+                val urlBase = "http://192.168.18.11:8081/aulas/nombre/"
 
                 // Iterar sobre cada aula en el HashMap
                 for ((aula, _) in tempAulas) {
@@ -107,52 +108,48 @@ class PlanoPlanta : AppCompatActivity() {
     private fun obtenerConfiguracionColores() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.17.99:8081/configuracion/nombre/admin")
+                val url = URL("http://192.168.18.11:8081/configuracion/nombre/admin")
                 val urlConnection = url.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
-
                 val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
                 val response = StringBuilder()
                 var line: String?
                 while (bufferedReader.readLine().also { line = it } != null) {
                     response.append(line)
                 }
-
-                // Procesar el JSON de respuesta
                 val jsonObject = JSONObject(response.toString())
-                colorFrio = colorTransparente(jsonObject.getString("colorFrio"))
-                colorOptimo = colorTransparente(jsonObject.getString("colorOptimo"))
-                colorCalor = colorTransparente(jsonObject.getString("colorCalor"))
+                colorFrio = jsonObject.getString("colorFrio")
+                colorOptimo = jsonObject.getString("colorOptimo")
+                colorCalor = jsonObject.getString("colorCalor")
                 notFrio = jsonObject.getDouble("notFrio")
                 notCalor = jsonObject.getDouble("notCalor")
-
-                // Cerrar la conexión
                 urlConnection.disconnect()
+                Log.d("ConfiguracionColores", "ColorFrio: $colorFrio, ColorOptimo: $colorOptimo, ColorCalor: $colorCalor")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-
-    // Método para determinar el color en función de la temperatura
     private fun getColorFromTemperature(temperature: Double): Int {
         return when {
-            temperature < 20 -> Color.parseColor("#751C3AFF") // Azul
-            temperature in 20.0..25.70 -> Color.parseColor("#7500FF00") // Verde
-            else -> Color.parseColor("#75ff0000") // Rojo
+            temperature < 20 -> Color.parseColor(colorTransparente(colorFrio))
+            temperature in 20.0..25.70 -> Color.parseColor(colorTransparente(colorOptimo))
+            else -> Color.parseColor(colorTransparente(colorCalor))
         }
     }
 
     fun colorTransparente(color: String, transparency: String = "75"): String {
-        // Verificar que el color recibido es un string de 7 caracteres (ej: #1C3AFF)
+        // Verificar si el color ya incluye transparencia (#AARRGGBB)
+        if (color.length == 9 && color.startsWith("#")) {
+            Log.d("ColorTransparente", "Color ya incluye transparencia: $color")
+            return color
+        }
+        // Verificar que el color recibido es un string de 7 caracteres (ej: #RRGGBB)
         if (color.length != 7 || !color.startsWith("#")) {
+            Log.e("ColorError", "Color inválido: $color")
             throw IllegalArgumentException("Color debe ser un string en formato #RRGGBB")
         }
-
-        // Crear el nuevo color con la transparencia
-        val newColor = "#$transparency${color.substring(1)}"
-
-        return newColor
+        return "#$transparency${color.substring(1)}"
     }
 }
