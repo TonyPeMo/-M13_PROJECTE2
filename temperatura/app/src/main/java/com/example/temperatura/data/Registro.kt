@@ -15,7 +15,7 @@ data class Registro(
 data class Registro(
     val registro: Int,
     val temperatura: Float,
-    val color: Int,
+    //val color: Int,
     val fecha: Date?,
     val aulaId: Int
 )
