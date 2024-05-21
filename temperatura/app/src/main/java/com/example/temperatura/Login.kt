@@ -25,8 +25,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class Login : AppCompatActivity() {
-    val ruta = "http://192.168.1.149:8081"
-
+    //val ruta = "http://192.168.1.149:8081"
+    val ruta = "http://192.168.18.11:8081"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
@@ -40,13 +40,13 @@ class Login : AppCompatActivity() {
             insets
         }
     }
+//    fun toInicio(view: View) {
+//        val intent = Intent(this@Login, PantallaInicio::class.java)
+//        intent.putExtra("username", "admin")
+//        intent.putExtra("ruta", ruta)
+//        startActivity(intent)
+//    }
     fun toInicio(view: View) {
-        val intent = Intent(this@Login, PantallaInicio::class.java)
-        intent.putExtra("username", "admin")
-        intent.putExtra("ruta", ruta)
-        startActivity(intent)
-    }
-    fun toInicioApi(view: View) {
         val usernameField = findViewById<TextInputEditText>(R.id.editTextUsuario)
         val passwordField = findViewById<TextInputEditText>(R.id.editTextPassword)
 
