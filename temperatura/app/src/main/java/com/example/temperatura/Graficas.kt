@@ -19,9 +19,11 @@ import com.example.temperatura.databinding.ActivityGraficasBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.lang.Math.round
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
+import kotlin.random.Random
 import kotlin.collections.ArrayList
 
 class Graficas : AppCompatActivity() {
@@ -37,7 +39,7 @@ class Graficas : AppCompatActivity() {
     private lateinit var selectedTimeFinal: Date
 
     //Graficas View
-    private var cantidadPuntos : Int = 6
+    private var cantidadPuntos : Int = 8
     private  lateinit var binding : ActivityGraficasBinding
     //private  lateinit var pieGrafica: PieGraph
     private  lateinit var lineGrafica: LineGraph
@@ -66,12 +68,36 @@ class Graficas : AppCompatActivity() {
         var linea = Line()
         for (i in 1..cantidadPuntos) {
             var ejeX = 15.0 + i
-            var ejeY = 18.2
-            linea = datosGrafica(linea, ejeX, ejeY)
+            val ejeY = String.format("%.1f", Random.nextDouble(15.5, 24.8)).toDouble()
+            linea = datosGrafica(linea, ejeX, ejeY, true)
         }
         linea.color = Color.parseColor("#FFBB33")
 
         graficarL(linea)
+
+
+        // Segunda linea
+
+        var segundaLinea = Line()
+        for (i in 1..cantidadPuntos) {
+            var ejeX = 15.0 + i
+            val ejeY = 18.0
+            segundaLinea = datosGrafica(segundaLinea, ejeX, ejeY, false)
+        }
+        segundaLinea.color = Color.parseColor("#1C3AFF") // Cambia el color si es necesario
+        graficarL(segundaLinea)
+
+        // Tercera linea
+
+        var terceraLinea = Line()
+        for (i in 1..cantidadPuntos) {
+            var ejeX = 15.0 + i
+            val ejeY = 23.0
+            terceraLinea = datosGrafica(terceraLinea, ejeX, ejeY, false)
+        }
+        terceraLinea.color = Color.parseColor("#ff0000") // Cambia el color si es necesario
+        graficarL(terceraLinea)
+
 
         binding.graphLine.setOnPointClickedListener { lineIndex, pointIndex ->
             Toast.makeText(
@@ -153,20 +179,21 @@ class Graficas : AppCompatActivity() {
     }
 
     // Función para agregar puntos a la línea
-    private fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double) : Line {
+    private fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double, texto: Boolean) : Line {
         val punto = LinePoint()
         punto.setX(ejeX)
         punto.setY(ejeY)
         linea.addPoint(punto)
 
-        binding.tvPuntos.text = "${binding.tvPuntos.text}\n15/05/2024 - Temperatura: $ejeY º"
-
+        if (texto) {
+            binding.tvPuntos.text = "${binding.tvPuntos.text}\n15/05/2024 - Temperatura: $ejeY º"
+        }
         return(linea)
     }
 
     fun graficarL(linea: Line) {
         binding.graphLine.addLine(linea)
-        binding.graphLine.setRangeX(15f, 26f)
+        binding.graphLine.setRangeX(15f, 23f)
         binding.graphLine.setRangeY(15f,26f)
     }
 

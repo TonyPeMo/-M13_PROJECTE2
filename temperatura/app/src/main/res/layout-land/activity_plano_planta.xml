@@ -85,7 +85,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
-        app:layout_constraintVertical_bias="0.667" />
+        app:layout_constraintVertical_bias="0.667"
+        android:onClick="toAula"/>
 
     <TextView
         android:id="@+id/temperaturaA03"
@@ -110,7 +111,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.438"
+        android:onClick="toAula"/>
 
     <TextView
         android:id="@+id/temperaturaA04"
@@ -136,7 +138,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
-        app:layout_constraintVertical_bias="0.456" />
+        app:layout_constraintVertical_bias="0.456"
+        android:onClick="toAula"/>
 
 
     <TextView
@@ -163,7 +166,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
-        app:layout_constraintVertical_bias="0.465" />
+        app:layout_constraintVertical_bias="0.465"
+        android:onClick="toAula"/>
 
     <TextView
         android:id="@+id/temperaturaA02"
@@ -190,20 +194,21 @@
         app:layout_constraintBottom_toBottomOf="@+id/mapaTemp"
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
-        app:layout_constraintVertical_bias="0.771" />
+        app:layout_constraintVertical_bias="0.771"
+        android:onClick="toAula"/>
 
     <TextView
         android:id="@+id/temperaturaA01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="94dp"
+        android:layout_height="50dp"
         android:textColor="#000000"
-        android:textStyle="bold"
         android:textSize="30dp"
-        tools:text="prueba"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/A01"
         app:layout_constraintEnd_toEndOf="@id/A01"
         app:layout_constraintStart_toStartOf="@id/A01"
-        app:layout_constraintTop_toTopOf="@id/A01" />
+        app:layout_constraintTop_toTopOf="@id/A01"
+        tools:text="prueba" />
 
     <ImageView
         android:id="@+id/img_graficos"
