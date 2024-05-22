@@ -26,7 +26,6 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -118,7 +117,7 @@ class Graficas : AppCompatActivity() {
     private fun obtenerConfiguracionColores() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.18.11:8081/configuracion/nombre/admin")
+                val url = URL("$ruta/configuracion/nombre/$username")
                 val urlConnection = url.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
 
@@ -142,17 +141,27 @@ class Graficas : AppCompatActivity() {
         }
     }
 
-    private fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double, texto: Boolean): Line {
+    private fun datosGrafica(linea: Line, fecha: Date? = null, ejeY: Double, texto: Boolean): Line {
         val punto = LinePoint()
-        punto.setX(ejeX)
+        punto.setX(linea.points.size.toDouble()) //
         punto.setY(ejeY)
         linea.addPoint(punto)
 
-        if (texto) {
-            binding.tvPuntos.text = "${binding.tvPuntos.text}\n15/05/2024 - Temperatura: $ejeY º"
+        // Si se proporciona la fecha, formatea la fecha y temperatura en texto y agrega al textView
+        if (fecha != null && texto) {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
+            val formattedDate = dateFormat.format(fecha)
+            val texto = "$formattedDate , ${timeFormat.format(fecha)}h - $ejeY ºC\n"
+
+            binding.tvPuntos.append(texto)
         }
+
         return linea
     }
+
+
 
     private fun graficarL(linea: Line, rangeXStart: Float, rangeXEnd: Float) {
         binding.graphLine.addLine(linea)
@@ -165,35 +174,34 @@ class Graficas : AppCompatActivity() {
 
         // Genera puntos para la línea API basados en los registros
         var lineaAPI = Line()
-        var ejeX = 15.0
         for (registro in registros) {
             val ejeY = registro.temperatura.toDouble()
-            lineaAPI = datosGrafica(lineaAPI, ejeX, ejeY, true)
-            ejeX += 1.0
+            lineaAPI = datosGrafica(lineaAPI, registro.fecha, ejeY, true)
         }
-        lineaAPI.color = Color.parseColor("#FF0000")
-        graficarL(lineaAPI, 15f, (15 + cantidadPuntos).toFloat())
+        lineaAPI.color = Color.parseColor("#FFFFC107")
+        graficarL(lineaAPI, 0f, (cantidadPuntos).toFloat())
 
         // Segunda línea
         var segundaLinea = Line()
         for (i in 1..cantidadPuntos) {
             val ejeX = 15.0 + i
             val ejeY = notFrio
-            segundaLinea = datosGrafica(segundaLinea, ejeX, ejeY, false)
+            segundaLinea = datosGrafica(segundaLinea, null, ejeY, false)
         }
         segundaLinea.color = Color.parseColor("#1C3AFF")
-        graficarL(segundaLinea, 15f, (15 + cantidadPuntos).toFloat())
+        graficarL(segundaLinea, 0f, (cantidadPuntos).toFloat())
 
         // Tercera línea
         var terceraLinea = Line()
         for (i in 1..cantidadPuntos) {
             val ejeX = 15.0 + i
             val ejeY = notCalor
-            terceraLinea = datosGrafica(terceraLinea, ejeX, ejeY, false)
+            terceraLinea = datosGrafica(terceraLinea, null, ejeY, false)
         }
         terceraLinea.color = Color.parseColor("#ff0000")
-        graficarL(terceraLinea, 15f, (15 + cantidadPuntos).toFloat())
+        graficarL(terceraLinea, 0f, (cantidadPuntos).toFloat())
     }
+
 
     fun showDatePicker(view: View) {
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -251,7 +259,7 @@ class Graficas : AppCompatActivity() {
                 val formattedFechaInicio = dateFormat.format(fechaInicio)
                 val formattedFechaFin = dateFormat.format(fechaFin)
 
-                val url = URL("http://192.168.18.11:8081/aulas/nombre/A01/registros/fecha?fechaInicio=$formattedFechaInicio&fechaFin=$formattedFechaFin")
+                val url = URL("$ruta/aulas/nombre/A01/registros/fecha?fechaInicio=$formattedFechaInicio&fechaFin=$formattedFechaFin")
                 val urlConnection = url.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
 

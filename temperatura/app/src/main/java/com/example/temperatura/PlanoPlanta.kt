@@ -65,7 +65,7 @@ class PlanoPlanta : AppCompatActivity() {
     private fun consultarTemperaturasPorAula() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val urlBase = "http://192.168.18.11:8081/aulas/nombre/"
+                val urlBase = "$ruta/aulas/nombre/"
 
                 // Iterar sobre cada aula en el HashMap
                 for ((aula, _) in tempAulas) {
@@ -138,7 +138,7 @@ class PlanoPlanta : AppCompatActivity() {
                 val filteredAulas = mutableListOf<String>()
 
                 for (aula in aulas) {
-                    val url = URL("http://192.168.18.11:8081/aulas/nombre/$aula/ultimafecha")
+                    val url = URL("$ruta/aulas/nombre/$aula/ultimafecha")
                     val urlConnection = url.openConnection() as HttpURLConnection
                     urlConnection.requestMethod = "GET"
 

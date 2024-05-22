@@ -68,7 +68,7 @@ class PantallaInicio : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 // Obtener la configuración de temperatura
-                val configUrl = URL("http://192.168.18.11:8081/configuracion/nombre/admin")
+                val configUrl = URL("$ruta/configuracion/nombre/admin")
                 val configUrlConnection = configUrl.openConnection() as HttpURLConnection
                 configUrlConnection.requestMethod = "GET"
 
@@ -96,7 +96,7 @@ class PantallaInicio : AppCompatActivity() {
                 val filteredAulas = mutableListOf<String>()
 
                 for (aula in aulas) {
-                    val url = URL("http://192.168.18.11:8081/aulas/nombre/$aula/ultimafecha")
+                    val url = URL("$ruta/aulas/nombre/$aula/ultimafecha")
                     val urlConnection = url.openConnection() as HttpURLConnection
                     urlConnection.requestMethod = "GET"
 
