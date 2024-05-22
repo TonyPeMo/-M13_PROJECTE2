@@ -14,10 +14,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class TemperaturaAula : AppCompatActivity() {
+
+    private var username: String? = null
+    private var ruta: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         setContentView(R.layout.activity_temperatura_aula)
+
+        username = intent.getStringExtra("username")
+        ruta = intent.getStringExtra("ruta")
 
         val temperaturaActual = obtenerTemperaturaActual()
         val temperaturaMinima = obtenerTemperaturaMinima()
@@ -82,6 +88,8 @@ class TemperaturaAula : AppCompatActivity() {
     }
 
     fun toAtras(view: View) {
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
         onBackPressed()
     }
 

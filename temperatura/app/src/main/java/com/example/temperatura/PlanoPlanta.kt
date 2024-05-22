@@ -19,6 +19,9 @@ import java.net.URL
 
 class PlanoPlanta : AppCompatActivity() {
 
+    private var username: String? = null
+    private var ruta: String? = null
+
     // HashMap para almacenar las temperaturas por habitación
     private val tempAulas: HashMap<String, Double> = HashMap()
     // Colores predeterminados
@@ -42,6 +45,8 @@ class PlanoPlanta : AppCompatActivity() {
             showFilteredValues()
         }
 
+        username = intent.getStringExtra("username")
+        ruta = intent.getStringExtra("ruta")
         // Agrega las temperaturas para cada aula
         tempAulas["A03"] = 0.0
         tempAulas["A04"] = 0.0
@@ -186,10 +191,14 @@ class PlanoPlanta : AppCompatActivity() {
 
     fun toAtras(view: View) {
         onBackPressed()
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
     }
 
     fun toGrafico(view: View) {
         val intent = Intent(this, Graficas::class.java).apply{}
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
         startActivity(intent);
     }
 

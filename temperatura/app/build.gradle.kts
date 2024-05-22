@@ -60,7 +60,16 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.skydoves/colorpickerpreference
     implementation ("com.github.yukuku:ambilwarna:2.0.1")
 
-    // GRAFICAS
     implementation ("org.quanqi:android-holo-graph:0.1.0")
+    // GRAFICAS
+
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-android
+    runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+
+    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+
 
 }

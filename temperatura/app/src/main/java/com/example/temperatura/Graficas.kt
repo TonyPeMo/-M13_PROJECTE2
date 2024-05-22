@@ -26,8 +26,8 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
-import kotlin.random.Random
 import kotlin.collections.ArrayList
 
 class Graficas : AppCompatActivity() {
@@ -39,6 +39,7 @@ class Graficas : AppCompatActivity() {
 
     private lateinit var selectedDateInicio: Date
     private lateinit var selectedTimeInicio: Date
+
     private lateinit var selectedDateFinal: Date
     private lateinit var selectedTimeFinal: Date
 
@@ -46,12 +47,16 @@ class Graficas : AppCompatActivity() {
     private lateinit var lineGrafica: LineGraph
     private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
 
-    private var notFrio = 15.0
-    private var notCalor = 23.5
+    private var username: String? = null
+    private var ruta: String? = null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //setContentView(R.layout.activity_graficas)
+        username = intent.getStringExtra("username")
+        ruta = intent.getStringExtra("ruta")
+        //Graficos
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
         obtenerConfiguracionColores()
@@ -193,6 +198,7 @@ class Graficas : AppCompatActivity() {
             .build()
 
         datePicker.addOnPositiveButtonClickListener {
+            // Handle positive button click and get selected date
             val selectedDateInMillis = it
             val calendar = Calendar.getInstance()
             calendar.timeInMillis = selectedDateInMillis
@@ -205,7 +211,9 @@ class Graficas : AppCompatActivity() {
                 selectedDateTextView_final.text = formattedDate
                 selectedDateFinal = calendar.time
             }
+            // Do something with the selected date
         }
+
         datePicker.show(supportFragmentManager, "datePicker")
     }
 
@@ -227,7 +235,9 @@ class Graficas : AppCompatActivity() {
                 selectedTimeTextView_final.text = String.format("%02d:%02d", hour, minute)
                 selectedTimeFinal = selectedTime
             }
+            // Do something with the selected time
         }
+
         timePicker.show(supportFragmentManager, "timePicker")
     }
 
@@ -273,8 +283,11 @@ class Graficas : AppCompatActivity() {
             }
         }
     }
+*/
 
     fun toAtras(view: View) {
         onBackPressed()
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
     }
 }
