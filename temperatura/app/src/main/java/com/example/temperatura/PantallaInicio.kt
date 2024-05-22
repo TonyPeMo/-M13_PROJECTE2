@@ -21,10 +21,15 @@ class PantallaInicio : AppCompatActivity() {
     private val aulas = listOf("A03", "A04", "ATECA", "A02", "A01")
     private var tFrio: Float = 0f
     private var tCalor: Float = 0f
+    private var username: String? = null
+    private var ruta: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pantalla_inicio)
+        username = intent.getStringExtra("username")
+        ruta = intent.getStringExtra("ruta")
 
         val notificaciones = findViewById<ImageView>(R.id.notificaciones)
         notificaciones.setOnClickListener {
@@ -39,17 +44,23 @@ class PantallaInicio : AppCompatActivity() {
 
     fun toGrafico(view: View) {
         val intent = Intent(this, Graficas::class.java).apply{}
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
         startActivity(intent);
     }
 
     fun toPlanta(view: View) {
         Log.d("PantallaInicio", "Se hizo clic en toPlanta()")
         val intent = Intent(this, PlanoPlanta::class.java)
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
         startActivity(intent)
     }
 
     fun toConfiguracion(view: View) {
         val intent = Intent(this, Configuracion::class.java).apply {}
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
         startActivity(intent);
     }
 

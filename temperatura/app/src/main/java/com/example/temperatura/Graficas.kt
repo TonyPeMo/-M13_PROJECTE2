@@ -49,6 +49,7 @@ class Graficas : AppCompatActivity() {
 
     private var username: String? = null
     private var ruta: String? = null
+
     private var notFrio = 15.0
     private var notCalor = 23.5
 
