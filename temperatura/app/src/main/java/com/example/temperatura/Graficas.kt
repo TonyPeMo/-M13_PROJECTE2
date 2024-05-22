@@ -42,8 +42,6 @@ class Graficas : AppCompatActivity() {
     private lateinit var selectedDateFinal: Date
     private lateinit var selectedTimeFinal: Date
 
-    //Graficas View
-    private var cantidadPuntos: Int = 10
     private lateinit var binding: ActivityGraficasBinding
     private lateinit var lineGrafica: LineGraph
     private var listaRegistrosLine: ArrayList<RegistroLine> = ArrayList()
@@ -51,72 +49,14 @@ class Graficas : AppCompatActivity() {
     private var notFrio = 15.0
     private var notCalor = 23.5
 
-    //Prueba json api
-    val registros = listOf(
-        Registro(registro = 91, temperatura = 19.5f, fecha = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2024-04-08 08:33:00"), aulaId = 1),
-        Registro(registro = 92, temperatura = 20.0f, fecha = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2024-04-08 08:30:00"), aulaId = 1),
-        Registro(registro = 93, temperatura = 18.5f, fecha = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2024-04-08 07:33:00"), aulaId = 1),
-        Registro(registro = 94, temperatura = 19.0f, fecha = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("2024-04-08 07:31:00"), aulaId = 1)
-    )
-
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
         obtenerConfiguracionColores()
+
         binding.tvPuntos.text = "Días\n"
-
-        // Genera puntos para la línea
-        var linea = Line()
-        for (i in 1..cantidadPuntos) {
-            var ejeX = 15.0 + i
-            val ejeY = String.format("%.1f", Random.nextDouble(15.5, 24.8)).toDouble()
-            linea = datosGrafica(linea, ejeX, ejeY, false)
-        }
-        linea.color = Color.parseColor("#FFBB33")
-
-        graficarL(linea)
-
-        // Genera puntos para la línea API basados en los registros
-        var lineaAPI = Line()
-        var ejeX = 15.0
-        for (registro in registros) {
-            val ejeY = registro.temperatura.toDouble()
-            lineaAPI = datosGrafica(lineaAPI, ejeX, ejeY, true)
-            ejeX += 1.0
-        }
-        lineaAPI.color = Color.parseColor("#FF0000")
-
-        graficarL(lineaAPI)
-
-        // Segunda línea
-        var segundaLinea = Line()
-        for (i in 1..cantidadPuntos) {
-            var ejeX = 15.0 + i
-            val ejeY = notFrio
-            segundaLinea = datosGrafica(segundaLinea, ejeX, ejeY, false)
-        }
-        segundaLinea.color = Color.parseColor("#1C3AFF")
-        graficarL(segundaLinea)
-
-        // Tercera línea
-        var terceraLinea = Line()
-        for (i in 1..cantidadPuntos) {
-            var ejeX = 15.0 + i
-            val ejeY = notCalor
-            terceraLinea = datosGrafica(terceraLinea, ejeX, ejeY, false)
-        }
-        terceraLinea.color = Color.parseColor("#ff0000")
-        graficarL(terceraLinea)
-
-        binding.graphLine.setOnPointClickedListener { lineIndex, pointIndex ->
-            Toast.makeText(
-                this@Graficas,
-                "Linea: $lineIndex, Punto: $pointIndex",
-                Toast.LENGTH_LONG
-            ).show()
-        }
 
         // Fecha Inicio
         selectedDateTextView_inicio = findViewById(R.id.textViewDatePicker_inicio)
@@ -141,9 +81,30 @@ class Graficas : AppCompatActivity() {
 
         selectedDateInicio = Date()
         selectedTimeInicio = Calendar.getInstance().apply { set(Calendar.HOUR_OF_DAY, 8); set(Calendar.MINUTE, 0) }.time
-
         selectedDateFinal = currentDate.time
         selectedTimeFinal = currentDate.time
+
+        // Configurar el botón para generar las líneas
+        binding.btnGenerar.setOnClickListener {
+            consultarRegistros(selectedDateInicio, selectedDateFinal) { registros ->
+                runOnUiThread {
+                    // Limpiar las líneas anteriores
+                    binding.graphLine.removeAllLines()
+                    binding.tvPuntos.text = "Días\n"
+
+                    generarLineas(registros)
+
+                    // Configurar el listener para los puntos después de graficar las líneas
+                    binding.graphLine.setOnPointClickedListener { lineIndex, pointIndex ->
+                        Toast.makeText(
+                            this@Graficas,
+                            "Linea: $lineIndex, Punto: $pointIndex",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            }
+        }
     }
 
     private fun obtenerConfiguracionColores() {
@@ -173,7 +134,6 @@ class Graficas : AppCompatActivity() {
         }
     }
 
-    // Función para agregar puntos a la línea
     private fun datosGrafica(linea: Line, ejeX: Double, ejeY: Double, texto: Boolean): Line {
         val punto = LinePoint()
         punto.setX(ejeX)
@@ -186,17 +146,51 @@ class Graficas : AppCompatActivity() {
         return linea
     }
 
-    fun graficarL(linea: Line) {
+    private fun graficarL(linea: Line, rangeXStart: Float, rangeXEnd: Float) {
         binding.graphLine.addLine(linea)
-        binding.graphLine.setRangeX(15f, 25f)
-        binding.graphLine.setRangeY(14.5f, 26f)
+        binding.graphLine.setRangeX(rangeXStart, rangeXEnd)
+        binding.graphLine.setRangeY(13f, 29f)
+    }
+
+    private fun generarLineas(registros: List<Registro>) {
+        val cantidadPuntos = registros.size
+
+        // Genera puntos para la línea API basados en los registros
+        var lineaAPI = Line()
+        var ejeX = 15.0
+        for (registro in registros) {
+            val ejeY = registro.temperatura.toDouble()
+            lineaAPI = datosGrafica(lineaAPI, ejeX, ejeY, true)
+            ejeX += 1.0
+        }
+        lineaAPI.color = Color.parseColor("#FF0000")
+        graficarL(lineaAPI, 15f, (15 + cantidadPuntos).toFloat())
+
+        // Segunda línea
+        var segundaLinea = Line()
+        for (i in 1..cantidadPuntos) {
+            val ejeX = 15.0 + i
+            val ejeY = notFrio
+            segundaLinea = datosGrafica(segundaLinea, ejeX, ejeY, false)
+        }
+        segundaLinea.color = Color.parseColor("#1C3AFF")
+        graficarL(segundaLinea, 15f, (15 + cantidadPuntos).toFloat())
+
+        // Tercera línea
+        var terceraLinea = Line()
+        for (i in 1..cantidadPuntos) {
+            val ejeX = 15.0 + i
+            val ejeY = notCalor
+            terceraLinea = datosGrafica(terceraLinea, ejeX, ejeY, false)
+        }
+        terceraLinea.color = Color.parseColor("#ff0000")
+        graficarL(terceraLinea, 15f, (15 + cantidadPuntos).toFloat())
     }
 
     fun showDatePicker(view: View) {
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select date")
-                .build()
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText("Select date")
+            .build()
 
         datePicker.addOnPositiveButtonClickListener {
             val selectedDateInMillis = it
@@ -216,11 +210,10 @@ class Graficas : AppCompatActivity() {
     }
 
     fun showTimePicker(view: View) {
-        val timePicker =
-            MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_24H)
-                .setTitleText("Select time")
-                .build()
+        val timePicker = MaterialTimePicker.Builder()
+            .setTimeFormat(TimeFormat.CLOCK_24H)
+            .setTitleText("Select time")
+            .build()
 
         timePicker.addOnPositiveButtonClickListener {
             val hour = timePicker.hour

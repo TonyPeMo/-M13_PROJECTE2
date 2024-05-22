@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,11 +27,20 @@ class PlanoPlanta : AppCompatActivity() {
     private var colorCalor = "#FF0000"
     private var notFrio = 18.5
     private var notCalor = 23.5
+    private var tFrio = 23.5
+    private var tCalor = 23.5
+    private val aulas = listOf("A03", "A04", "ATECA", "A02", "A01")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plano_planta)
+
+        val notificaciones = findViewById<ImageView>(R.id.notificationIcon)
+        notificaciones.setOnClickListener {
+            showFilteredValues()
+        }
 
         // Agrega las temperaturas para cada aula
         tempAulas["A03"] = 0.0
@@ -91,6 +101,89 @@ class PlanoPlanta : AppCompatActivity() {
         }
     }
 
+    private fun showFilteredValues() {
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                // Obtener la configuración de temperatura
+                val configUrl = URL("http://192.168.18.11:8081/configuracion/nombre/admin")
+                val configUrlConnection = configUrl.openConnection() as HttpURLConnection
+                configUrlConnection.requestMethod = "GET"
+
+                val configBufferedReader = BufferedReader(InputStreamReader(configUrlConnection.inputStream))
+                val configResponse = StringBuilder()
+                var configLine: String?
+                while (configBufferedReader.readLine().also { configLine = it } != null) {
+                    configResponse.append(configLine)
+                }
+
+                // Procesar el JSON de respuesta de la configuración
+                val configJsonObject = JSONObject(configResponse.toString())
+                Log.d("PantallaInicio", "Respuesta del servidor: ${configResponse.toString()}")
+                tFrio = configJsonObject.getDouble("notFrio").toFloat().toDouble()
+                tCalor = configJsonObject.getDouble("notCalor").toFloat().toDouble()
+
+                // Log para verificar los parámetros recibidos
+                Log.d("PantallaInicio", "tFrio: $tFrio, tCalor: $tCalor (${tCalor::class.simpleName})")
+
+
+                // Cerrar la conexión de configuración
+                configUrlConnection.disconnect()
+
+                // Obtener los valores de temperatura de las aulas
+                val filteredAulas = mutableListOf<String>()
+
+                for (aula in aulas) {
+                    val url = URL("http://192.168.18.11:8081/aulas/nombre/$aula/ultimafecha")
+                    val urlConnection = url.openConnection() as HttpURLConnection
+                    urlConnection.requestMethod = "GET"
+
+                    Log.d("PantallaInicio", "1")
+
+                    val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+                    val response = StringBuilder()
+                    var line: String?
+                    while (bufferedReader.readLine().also { line = it } != null) {
+                        response.append(line)
+                    }
+                    Log.d("PantallaInicio", "2")
+
+                    // Procesar el JSON de respuesta de temperatura del aula
+                    val temperatura = response.toString().toDouble()
+
+                    // Agregar el aula a la lista si está por encima de tCalor o por debajo de tFrio
+                    if (temperatura > tCalor || temperatura < tFrio) {
+                        filteredAulas.add(aula)
+                        Log.d("PantallaInicio", "Aula agregada a filteredAulas: $aula")
+                    }
+
+                    // Cerrar la conexión del aula
+                    urlConnection.disconnect()
+                }
+
+                runOnUiThread {
+                    showAulas(filteredAulas)
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+    private fun showAulas(aulas: List<String>) {
+        val items = aulas.toTypedArray()
+
+        // Crear y mostrar el AlertDialog
+        AlertDialog.Builder(this@PlanoPlanta)
+            .setTitle("Aulas fuera de la temperatura establecida:")
+            .setItems(items) { dialog, which ->
+                // Acción opcional al hacer clic en un elemento
+            }
+            .setNegativeButton("Cerrar") { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
     fun toAtras(view: View) {
         onBackPressed()
     }
@@ -123,6 +216,8 @@ class PlanoPlanta : AppCompatActivity() {
                 colorCalor = jsonObject.getString("colorCalor")
                 notFrio = jsonObject.getDouble("notFrio")
                 notCalor = jsonObject.getDouble("notCalor")
+                tFrio = jsonObject.getDouble("tFrio")
+                tCalor = jsonObject.getDouble("tCalor")
                 urlConnection.disconnect()
                 Log.d("ConfiguracionColores", "ColorFrio: $colorFrio, ColorOptimo: $colorOptimo, ColorCalor: $colorCalor")
             } catch (e: Exception) {
@@ -133,8 +228,8 @@ class PlanoPlanta : AppCompatActivity() {
 
     private fun getColorFromTemperature(temperature: Double): Int {
         return when {
-            temperature < 20 -> Color.parseColor(colorTransparente(colorFrio))
-            temperature in 20.0..25.70 -> Color.parseColor(colorTransparente(colorOptimo))
+            temperature < tFrio -> Color.parseColor(colorTransparente(colorFrio))
+            temperature in tFrio..tCalor -> Color.parseColor(colorTransparente(colorOptimo))
             else -> Color.parseColor(colorTransparente(colorCalor))
         }
     }
@@ -152,4 +247,6 @@ class PlanoPlanta : AppCompatActivity() {
         }
         return "#$transparency${color.substring(1)}"
     }
+
+
 }

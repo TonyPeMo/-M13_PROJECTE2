@@ -215,11 +215,6 @@
                     android:layout_gravity="center"
                     android:gravity="center">
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnGuardar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Guardar"/>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnGenerar"
