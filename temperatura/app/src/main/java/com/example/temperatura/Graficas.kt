@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -50,7 +53,6 @@ class Graficas : AppCompatActivity() {
     private var ruta: String? = null
     private var selectedAula: String? = "A01"
 
-
     private var notFrio = 15.0
     private var notCalor = 23.5
 
@@ -95,6 +97,30 @@ class Graficas : AppCompatActivity() {
         selectedDateFinal = currentDate.time
         selectedTimeFinal = currentDate.time
 
+        // Inicializar el Spinner y agregar el listener
+        val spinner = findViewById<Spinner>(R.id.spinner_menu)
+        val aulas = listOf("A01", "A02", "A03", "A04", "ATECA") // La lista de aulas disponibles
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, aulas)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        // Seleccionar el aula actual en el Spinner
+        val position = aulas.indexOf(selectedAula)
+        if (position >= 0) {
+            spinner.setSelection(position)
+        }
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                selectedAula = parent.getItemAtPosition(position) as String
+                updateGraph()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // No action needed
+            }
+        }
+
         // Configurar el botón para generar las líneas
         binding.btnGenerar.setOnClickListener {
             consultarRegistros(selectedDateInicio, selectedDateFinal) { registros ->
@@ -114,6 +140,17 @@ class Graficas : AppCompatActivity() {
                         ).show()
                     }
                 }
+            }
+        }
+    }
+
+    private fun updateGraph() {
+        // Actualizar el gráfico según el aula seleccionada
+        consultarRegistros(selectedDateInicio, selectedDateFinal) { registros ->
+            runOnUiThread {
+                binding.graphLine.removeAllLines()
+                binding.tvPuntos.text = "Días\n"
+                generarLineas(registros)
             }
         }
     }
@@ -159,14 +196,11 @@ class Graficas : AppCompatActivity() {
             val formattedDate = dateFormat.format(fecha)
             val texto = "$formattedDate , ${timeFormat.format(fecha)}h - ${"%.2f".format(ejeY)} ºC\n"
 
-
             binding.tvPuntos.append(texto)
         }
 
         return linea
     }
-
-
 
     private fun graficarL(linea: Line, rangeXStart: Float, rangeXEnd: Float) {
         binding.graphLine.addLine(linea)
@@ -206,7 +240,6 @@ class Graficas : AppCompatActivity() {
         terceraLinea.color = Color.parseColor("#ff0000")
         graficarL(terceraLinea, 0f, (cantidadPuntos).toFloat())
     }
-
 
     fun showDatePicker(view: View) {
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -309,4 +342,4 @@ class Graficas : AppCompatActivity() {
 
 //http://192.168.18.11:8081/aulas/nombre/A01/registros/fecha?fechaInicio=2024-04-07%2010:33:00&fechaFin=2024-04-08%2010:33:00
 //http://192.168.18.11:8081/configuracion/nombre/admin
-//http://192.168.18.11:8081/aulas/nombre/A01/ultimafecha"
+//http://192.168.18.11:8081/aulas/nombre/A01/ultimafecha
