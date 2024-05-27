@@ -40,13 +40,13 @@ class Login : AppCompatActivity() {
             insets
         }
     }
-//    fun toInicio(view: View) {
-//        val intent = Intent(this@Login, PantallaInicio::class.java)
-//        intent.putExtra("username", "admin")
-//        intent.putExtra("ruta", ruta)
-//        startActivity(intent)
-//    }
     fun toInicio(view: View) {
+        val intent = Intent(this@Login, PantallaInicio::class.java)
+        intent.putExtra("username", "admin")
+        intent.putExtra("ruta", ruta)
+        startActivity(intent)
+    }
+    fun toInicioa(view: View) {
         val usernameField = findViewById<TextInputEditText>(R.id.editTextUsuario)
         val passwordField = findViewById<TextInputEditText>(R.id.editTextPassword)
 
