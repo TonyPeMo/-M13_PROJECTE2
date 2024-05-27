@@ -84,6 +84,19 @@
                 <!-- Texto: Información de l'aula -->
 
                 <!-- Texto: Temperatura actual -->
+
+                <TextView
+                    android:id="@+id/nombreAula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -93,26 +106,34 @@
                     android:textColor="#000000" />
 
                 <!-- Texto: Temperatura mínima -->
-                <TextView
-                    android:id="@+id/textViewTemperaturaActual"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/info_aula_temperatura_actual" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textViewTemperaturaMinima"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/info_aula_temperatura_minima" />
+                    <TextView
+                        android:id="@+id/textViewTemperaturaActual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="@string/info_aula_temperatura_actual" />
 
-                <TextView
-                    android:id="@+id/textViewTemperaturaMaxima"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/info_aula_temperatura_maxima" />
+                    <TextView
+                        android:id="@+id/temperatura"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0"
+                    android:onClick="toGrafico"
+                    app:srcCompat="@drawable/ic_graph" />
 
             </LinearLayout>
 
