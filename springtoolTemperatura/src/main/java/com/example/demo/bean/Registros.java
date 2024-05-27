@@ -1,10 +1,7 @@
 package com.example.demo.bean;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
-
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -16,18 +13,14 @@ public class Registros {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_REGISTRO")
     private int idRegistro;
-
     @ManyToOne
     @JoinColumn(name = "ID_AULA", nullable = false)
     @JsonIgnore
     private Aulas aulas;
-
     @Column(name = "TEMPERATURA", nullable = false)
     private float temperatura;
-
     @Column(name = "TERMOMETRO", nullable = false)
     private int termometro;
-
     @Column(name = "FECHA", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")

@@ -48,6 +48,7 @@ class Graficas : AppCompatActivity() {
 
     private var username: String? = null
     private var ruta: String? = null
+    private var selectedAula: String? = "A01"
 
     private var notFrio = 15.0
     private var notCalor = 23.5
@@ -58,6 +59,8 @@ class Graficas : AppCompatActivity() {
         //setContentView(R.layout.activity_graficas)
         username = intent.getStringExtra("username")
         ruta = intent.getStringExtra("ruta")
+        selectedAula = intent.getStringExtra("aula")
+
         //Graficos
         binding = ActivityGraficasBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -259,7 +262,7 @@ class Graficas : AppCompatActivity() {
                 val formattedFechaInicio = dateFormat.format(fechaInicio)
                 val formattedFechaFin = dateFormat.format(fechaFin)
 
-                val url = URL("$ruta/aulas/nombre/A01/registros/fecha?fechaInicio=$formattedFechaInicio&fechaFin=$formattedFechaFin")
+                val url = URL("$ruta/aulas/nombre/$selectedAula/registros/fecha?fechaInicio=$formattedFechaInicio&fechaFin=$formattedFechaFin")
                 val urlConnection = url.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
 

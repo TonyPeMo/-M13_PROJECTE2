@@ -17,23 +17,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/registros")
 public class RegistrosController {
-
     private final RegistrosRepository registrosRepository;
-
     private final AulasRepository aulasRepository;
-
     @Autowired
     public RegistrosController(RegistrosRepository registrosRepository, AulasRepository aulasRepository) {
         this.registrosRepository = registrosRepository;
         this.aulasRepository = aulasRepository;
     }
-
-    //http://localhost:8081/registros?idAula=3
-//    {
-//        "temperatura": 19.5,
-//            "termometro": 1,
-//            "fecha": "2024-04-08 10:33:00"
-//    }
     @PostMapping
     public Registros createRegistro(@RequestBody Registros registroRequest, @RequestParam Integer idAula) {
         System.out.println(registroRequest);

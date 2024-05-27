@@ -21,6 +21,8 @@ class PlanoPlanta : AppCompatActivity() {
 
     private var username: String? = null
     private var ruta: String? = null
+    private var selectedAula: String? = "A01"
+
 
     // HashMap para almacenar las temperaturas por habitación
     private val tempAulas: HashMap<String, Double> = HashMap()
@@ -47,6 +49,7 @@ class PlanoPlanta : AppCompatActivity() {
 
         username = intent.getStringExtra("username")
         ruta = intent.getStringExtra("ruta")
+
         // Agrega las temperaturas para cada aula
         tempAulas["A03"] = 0.0
         tempAulas["A04"] = 0.0
@@ -60,6 +63,34 @@ class PlanoPlanta : AppCompatActivity() {
 
         // Llamar a la función para consultar la API cuando se crea la actividad
         actualizarInterfaz()
+        val aulaA01 = findViewById<ImageView>(R.id.A01)
+        aulaA01.setOnClickListener {
+            selectedAula = "A01"
+            toAula()
+        }
+        val aulaA02 = findViewById<ImageView>(R.id.A02)
+        aulaA02.setOnClickListener {
+            selectedAula = "A02"
+            toAula()
+        }
+        val aulaA03 = findViewById<ImageView>(R.id.A03)
+        aulaA03.setOnClickListener {
+            selectedAula = "A03"
+            toAula()
+        }
+        val aulaA04 = findViewById<ImageView>(R.id.A04)
+        aulaA04.setOnClickListener {
+            selectedAula = "A04"
+            toAula()
+        }
+        val aulaATECA = findViewById<ImageView>(R.id.ATECA)
+        aulaATECA.setOnClickListener {
+            selectedAula = "ATECA"
+            toAula()
+        }
+
+
+
     }
 
     private fun consultarTemperaturasPorAula() {
@@ -199,18 +230,22 @@ class PlanoPlanta : AppCompatActivity() {
         val intent = Intent(this, Graficas::class.java).apply{}
         intent.putExtra("username", username)
         intent.putExtra("ruta", ruta)
+        intent.putExtra("aula", selectedAula)
         startActivity(intent);
     }
 
-    fun toAula(view: View) {
+    fun toAula() {
         val intent = Intent(this, TemperaturaAula::class.java).apply{}
+        intent.putExtra("username", username)
+        intent.putExtra("ruta", ruta)
+        intent.putExtra("aula", selectedAula)
         startActivity(intent);
     }
 
     private fun obtenerConfiguracionColores() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
-                val url = URL("http://192.168.18.11:8081/configuracion/nombre/admin")
+                val url = URL("$ruta/configuracion/nombre/$username")
                 val urlConnection = url.openConnection() as HttpURLConnection
                 urlConnection.requestMethod = "GET"
                 val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))

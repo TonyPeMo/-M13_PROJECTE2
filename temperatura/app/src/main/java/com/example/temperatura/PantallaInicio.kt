@@ -23,6 +23,8 @@ class PantallaInicio : AppCompatActivity() {
     private var tCalor: Float = 0f
     private var username: String? = null
     private var ruta: String? = null
+    private var selectedAula: String? = "A01"
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +48,7 @@ class PantallaInicio : AppCompatActivity() {
         val intent = Intent(this, Graficas::class.java).apply{}
         intent.putExtra("username", username)
         intent.putExtra("ruta", ruta)
+        intent.putExtra("aula", selectedAula)
         startActivity(intent);
     }
 

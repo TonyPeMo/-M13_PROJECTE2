@@ -86,7 +86,7 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.667"
-        android:onClick="toAula"/>
+        />
 
     <TextView
         android:id="@+id/temperaturaA03"
@@ -112,7 +112,7 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.438"
-        android:onClick="toAula"/>
+        />
 
     <TextView
         android:id="@+id/temperaturaA04"
@@ -139,7 +139,7 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.456"
-        android:onClick="toAula"/>
+        />
 
 
     <TextView
@@ -167,7 +167,7 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.465"
-        android:onClick="toAula"/>
+        />
 
     <TextView
         android:id="@+id/temperaturaA02"
@@ -195,7 +195,7 @@
         app:layout_constraintStart_toStartOf="@+id/mapaTemp"
         app:layout_constraintTop_toTopOf="@+id/mapaTemp"
         app:layout_constraintVertical_bias="0.771"
-        android:onClick="toAula"/>
+        />
 
     <TextView
         android:id="@+id/temperaturaA01"
