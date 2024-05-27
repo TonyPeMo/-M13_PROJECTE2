@@ -32,12 +32,18 @@
 
 
 
-    <string-array name="menu_options">
-        <item>A03 </item>
-        <item>A01</item>
+    <string-array name="menu_options_plantas">
+        <item>Planta 0 </item>
+        <item>Planta 4</item>
+        <item>Planta 5</item>
+    </string-array>
+
+    <string-array name="menu_options_aulas">
+        <item>A01 </item>
         <item>A02</item>
-        <item>ATECA</item>
+        <item>A03</item>
         <item>A04</item>
+        <item>ATECA</item>
     </string-array>
 
         <!-- Otras cadenas -->

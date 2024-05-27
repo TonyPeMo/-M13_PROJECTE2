@@ -36,7 +36,7 @@
                 android:id="@+id/spinner_menu"
                 android:layout_width="115dp"
                 android:layout_height="48dp"
-                android:entries="@array/menu_options"
+                android:entries="@array/menu_options_aulas"
                 android:popupBackground="@android:color/white"
                 app:layout_constraintEnd_toStartOf="@+id/notificationIcon"
                 app:layout_constraintHorizontal_bias="0.537"

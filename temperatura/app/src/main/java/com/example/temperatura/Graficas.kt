@@ -301,3 +301,7 @@ class Graficas : AppCompatActivity() {
         intent.putExtra("ruta", ruta)
     }
 }
+
+//http://192.168.18.11:8081/aulas/nombre/A01/registros/fecha?fechaInicio=2024-04-07%2010:33:00&fechaFin=2024-04-08%2010:33:00
+//http://192.168.18.11:8081/configuracion/nombre/admin
+//http://192.168.18.11:8081/aulas/nombre/A01/ultimafecha"
