@@ -97,7 +97,8 @@ class PlanoPlanta : AppCompatActivity() {
     private fun actualizarInterfaz() {
         // Iterar sobre el HashMap y actualizar las temperaturas en la interfaz de usuario
         for ((aula, temperatura) in tempAulas) {
-            val temperatureTextView = findViewById<TextView>(resources.getIdentifier("temperatura$aula", "id", packageName))
+            val temperatureTextView = findViewById<TextView>(resources.getIdentifier("temperatura$aula",
+                                                                                    "id", packageName))
             temperatureTextView.text = "${temperatura.toString()} ºC"
 
             // Actualizar el color de fondo basado en la temperatura
@@ -228,7 +229,6 @@ class PlanoPlanta : AppCompatActivity() {
                 tFrio = jsonObject.getDouble("tFrio")
                 tCalor = jsonObject.getDouble("tCalor")
                 urlConnection.disconnect()
-                Log.d("ConfiguracionColores", "ColorFrio: $colorFrio, ColorOptimo: $colorOptimo, ColorCalor: $colorCalor")
             } catch (e: Exception) {
                 e.printStackTrace()
             }
