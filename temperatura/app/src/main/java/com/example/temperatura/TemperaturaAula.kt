@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +28,7 @@ class TemperaturaAula : AppCompatActivity() {
     private var ruta: String? = null
     private var selectedAula: String? = "A01"
     private var temperatura: Double = 0.0
+    private lateinit var spinner: Spinner
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +46,19 @@ class TemperaturaAula : AppCompatActivity() {
         nombreAula.text = selectedAula
 
         // Inicializar el Spinner y agregar el listener
-        val spinner = findViewById<Spinner>(R.id.spinner_menu)
+        spinner = findViewById(R.id.spinner_menu)
+
+        val aulas = listOf("A01", "A02", "A03", "A04", "ATECA") // La lista de aulas disponibles
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, aulas)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        // Seleccionar el aula actual en el Spinner
+        val position = aulas.indexOf(selectedAula)
+        if (position >= 0) {
+            spinner.setSelection(position)
+        }
+
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 selectedAula = parent.getItemAtPosition(position) as String
